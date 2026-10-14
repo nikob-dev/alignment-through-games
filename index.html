@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alignment Through Games</title>
+  <meta name="description" content="A 12-month learning path on how AI agents learn rules and goals, and on the alignment control problem, taught through games.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l3.2 10.8L30 16l-10.8 3.2L16 30l-3.2-10.8L2 16l10.8-3.2z' fill='%23d97706'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    try {
+      const saved = localStorage.getItem("theme");
+      if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+    } catch (_) { /* storage unavailable: fall back to system theme */ }
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">
+        <svg class="brand-star" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l3.2 10.8L30 16l-10.8 3.2L16 30l-3.2-10.8L2 16l10.8-3.2z"/></svg>
+        <span>Alignment Through Games</span>
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#roadmap">Roadmap</a>
+        <a href="#modules">Modules</a>
+        <a href="#resources">Resources</a>
+        <a href="#log">Log</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <p class="eyebrow" data-bind="eyebrow"></p>
+      <h1 data-bind="title"></h1>
+      <p class="thesis" data-bind="thesis"></p>
+      <p class="scope" data-bind="scope"></p>
+      <ul class="stats" id="stats"></ul>
+    </section>
+
+    <section class="wrap section" aria-labelledby="arc-h">
+      <h2 id="arc-h">The arc</h2>
+      <ol class="arc" id="arc"></ol>
+    </section>
+
+    <section class="wrap section" aria-labelledby="method-h">
+      <h2 id="method-h">How to use this path</h2>
+      <div class="method" id="method"></div>
+    </section>
+
+    <section class="wrap section" id="roadmap" aria-labelledby="roadmap-h">
+      <h2 id="roadmap-h">Roadmap</h2>
+      <p class="legend" id="legend"></p>
+      <ol class="roadmap" id="roadmap-list"></ol>
+    </section>
+
+    <section class="wrap section" id="modules" aria-labelledby="modules-h">
+      <div class="section-head">
+        <h2 id="modules-h">Modules</h2>
+        <button class="text-btn" type="button" id="toggle-all">Expand all</button>
+      </div>
+      <div id="module-list"></div>
+    </section>
+
+    <section class="wrap section" id="resources" aria-labelledby="resources-h">
+      <h2 id="resources-h">Resources</h2>
+      <div class="resources" id="resource-list"></div>
+    </section>
+
+    <section class="wrap section" id="log" aria-labelledby="log-h">
+      <h2 id="log-h">Progress log</h2>
+      <ol class="log" id="log-list"></ol>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Sources checked <span data-bind="checked"></span>. <a data-bind-href="repo">Source on GitHub</a>.</p>
+  </footer>
+  <noscript><p class="wrap">This page renders its content with JavaScript. See curriculum.json in the repository for the raw outline.</p></noscript>
+</body>
+</html>
