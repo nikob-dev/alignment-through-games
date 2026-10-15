@@ -1,6 +1,6 @@
 const STATUS_LABELS = { next: "Up next", active: "In progress", done: "Done" };
-const KIND_ORDER = ["book", "course", "video", "blog", "podcast", "paper", "tool"];
-const KIND_LABELS = { book: "Books", course: "Courses", video: "Videos", blog: "Blogs", podcast: "Podcasts", paper: "Papers", tool: "Tools" };
+const KIND_ORDER = ["book", "course", "video", "blog", "podcast", "paper"];
+const KIND_LABELS = { book: "Books", course: "Courses", video: "Videos", blog: "Blogs", podcast: "Podcasts", paper: "Papers" };
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -40,17 +40,28 @@ function fallbackMedia(entry) {
   return el("div", { class: "pfallback" }, el("strong", { text: entry.kind }), el("span", { text: hostOf(entry.url) }));
 }
 
-function previewCard(entry, preview, moduleTags) {
+// The card is a div, not a link, so extra links can sit inside it. The title
+// link stretches over the whole card in CSS; extra links are layered above it.
+function previewCard(entry, preview, { moduleTags = null, core = null, isCore = false } = {}) {
   const media = el("div", { class: "pmedia" });
   const thumb = optionalImage(preview?.image, {}, (img) => img.replaceWith(fallbackMedia(entry)));
   media.append(thumb ?? fallbackMedia(entry));
 
-  return el("a", { class: "pcard", href: entry.url, target: "_blank", rel: "noopener", "data-kind": entry.kind },
+  const extras = entry.extra?.length
+    ? el("div", { class: "pextra" }, entry.extra.map((link) => el("a", { href: link.url, target: "_blank", rel: "noopener", text: `${link.label} ↗` })))
+    : null;
+
+  return el("div", { class: "pcard", "data-kind": entry.kind, "data-core": String(isCore || Boolean(core)) },
     media,
     el("div", { class: "pbody" },
-      el("span", { class: "pkind", text: entry.kind }),
-      el("h4", { class: "ptitle", text: entry.title }),
+      el("div", { class: "ptop" },
+        el("span", { class: "pkind", text: entry.kind }),
+        isCore ? el("span", { class: "pbadge", text: "Core" }) : null
+      ),
+      el("h4", { class: "ptitle" }, el("a", { class: "plink", href: entry.url, target: "_blank", rel: "noopener", text: entry.title })),
+      core ? el("p", { class: "pcore" }, el("strong", { text: core.scope }), ` · ${core.time}`) : null,
       el("p", { class: "pnote", text: entry.note || preview?.description || "" }),
+      extras,
       el("div", { class: "psite" },
         optionalImage(preview?.icon, { width: "13", height: "13" }),
         el("span", { text: preview?.site || hostOf(entry.url) }),
@@ -107,7 +118,10 @@ function renderModule(mod, { toolsById, library, previews }) {
       optionalImage(previews[tool.url]?.icon, { width: "14", height: "14" }), tool.title));
   });
 
-  const resources = library.filter((entry) => entry.kind !== "tool" && entry.modules.includes(mod.id)).sort(byKind);
+  const libraryById = new Map(library.map((entry) => [entry.id, entry]));
+  const coreIds = new Set(mod.core.map((item) => item.id));
+  const coreCards = mod.core.map((item) => previewCard(libraryById.get(item.id), previews[libraryById.get(item.id).url], { core: item }));
+  const deeper = library.filter((entry) => entry.modules.includes(mod.id) && !coreIds.has(entry.id)).sort(byKind);
 
   const body = el("div", { class: "module-body" },
     el("p", { class: "module-summary", text: mod.summary }),
@@ -129,8 +143,13 @@ function renderModule(mod, { toolsById, library, previews }) {
       )
     ),
     el("div", { class: "block resources-block" },
-      el("h4", { text: `Resources (${resources.length})` }),
-      el("div", { class: "pgrid" }, resources.map((entry) => previewCard(entry, previews[entry.url])))
+      el("h4", { text: "Start here" }),
+      el("div", { class: "pgrid" }, coreCards),
+      deeper.length
+        ? el("details", { class: "deeper" },
+            el("summary", { text: `Go deeper (${deeper.length})` }),
+            el("div", { class: "pgrid" }, deeper.map((entry) => previewCard(entry, previews[entry.url]))))
+        : null
     )
   );
 
@@ -154,15 +173,14 @@ function renderModules(modules, context) {
 }
 
 function moduleTagsFor(entry, modules) {
-  const ids = entry.kind === "tool"
-    ? modules.filter((mod) => mod.tools.includes(entry.id)).map((mod) => mod.level)
-    : modules.filter((mod) => entry.modules.includes(mod.id)).map((mod) => mod.level);
-  return ids.length ? ids.map((level) => `M${level}`).join(" · ") : null;
+  return modules.filter((mod) => entry.modules.includes(mod.id)).map((mod) => `M${mod.level}`).join(" · ");
 }
 
 function renderLibrary(library, modules, previews) {
+  const coreIds = new Set(modules.flatMap((mod) => mod.core.map((item) => item.id)));
   const sorted = [...library].sort(byKind);
-  const cards = sorted.map((entry) => previewCard(entry, previews[entry.url], moduleTagsFor(entry, modules)));
+  const cards = sorted.map((entry) =>
+    previewCard(entry, previews[entry.url], { moduleTags: moduleTagsFor(entry, modules), isCore: coreIds.has(entry.id) }));
   document.getElementById("library-grid").append(...cards);
 
   const counts = Object.fromEntries(KIND_ORDER.map((kind) => [kind, sorted.filter((entry) => entry.kind === kind).length]));
@@ -170,14 +188,27 @@ function renderLibrary(library, modules, previews) {
   const buttons = [["all", "All", sorted.length], ...KIND_ORDER.map((kind) => [kind, KIND_LABELS[kind], counts[kind]])]
     .filter(([, , count]) => count > 0)
     .map(([kind, label, count]) => el("button", { type: "button", "data-filter": kind, "aria-pressed": String(kind === "all") }, label, el("small", { text: String(count) })));
-  filters.append(...buttons);
+  const coreToggle = el("button", { type: "button", class: "core-toggle", "aria-pressed": "false" }, "Core only", el("small", { text: String(coreIds.size) }));
+  filters.append(...buttons, coreToggle);
+
+  let kindFilter = "all";
+  const applyFilters = () => {
+    const coreOnly = coreToggle.getAttribute("aria-pressed") === "true";
+    for (const card of cards) {
+      card.hidden = (kindFilter !== "all" && card.dataset.kind !== kindFilter) || (coreOnly && card.dataset.core !== "true");
+    }
+  };
 
   filters.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-filter]");
+    const button = event.target.closest("button");
     if (!button) return;
-    const filter = button.dataset.filter;
-    for (const other of buttons) other.setAttribute("aria-pressed", String(other === button));
-    for (const card of cards) card.hidden = filter !== "all" && card.dataset.kind !== filter;
+    if (button === coreToggle) {
+      coreToggle.setAttribute("aria-pressed", String(coreToggle.getAttribute("aria-pressed") !== "true"));
+    } else {
+      kindFilter = button.dataset.filter;
+      for (const other of buttons) other.setAttribute("aria-pressed", String(other === button));
+    }
+    applyFilters();
   });
 }
 
@@ -215,7 +246,7 @@ async function main() {
   setupThemeToggle();
   const [data, previewFile] = await Promise.all([fetchJson("curriculum.json"), fetchJson("previews.json")]);
   const previews = previewFile.previews;
-  const toolsById = new Map(data.library.filter((entry) => entry.kind === "tool").map((entry) => [entry.id, entry]));
+  const toolsById = new Map(data.tools.map((tool) => [tool.id, tool]));
 
   renderMeta(data.meta);
   renderArc(data.arc);

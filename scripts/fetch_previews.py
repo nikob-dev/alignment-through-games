@@ -1,4 +1,4 @@
-"""Fetch link-preview metadata for every library URL into previews.json.
+"""Fetch link-preview metadata for every library, extra-link and tool URL into previews.json.
 
 Run from the repo root whenever library entries change:
     python3 scripts/fetch_previews.py
@@ -114,8 +114,13 @@ def fetch(url: str) -> tuple[str, dict[str, str | None] | None, str | None]:
 
 
 def main() -> int:
-    library = json.loads(CURRICULUM.read_text())["library"]
-    urls = sorted({entry["url"] for entry in library})
+    data = json.loads(CURRICULUM.read_text())
+    # Extra links and tools only need a favicon, but fetching them also link-checks them.
+    urls = sorted(
+        {entry["url"] for entry in data["library"]}
+        | {link["url"] for entry in data["library"] for link in entry.get("extra", [])}
+        | {tool["url"] for tool in data["tools"]}
+    )
 
     with ThreadPoolExecutor(max_workers=8) as pool:
         results = list(pool.map(fetch, urls))

@@ -8,13 +8,6 @@
       "site": "incompleteideas.net",
       "icon": "http://incompleteideas.net/favicon.ico"
     },
-    "https://80000hours.org/podcast/episodes/buck-shlegeris-ai-control/": {
-      "title": "Buck Shlegeris on controlling AI that wants to take over – so we can use it anyway | 80,000 Hours",
-      "description": null,
-      "image": "https://80000hours.org/wp-content/uploads/2025/04/TL12_Buck_S-EDIT-V1.7_01_17_37_06-scaled.jpg",
-      "site": "80,000 Hours",
-      "icon": "https://80000hours.org/favicon-152.png"
-    },
     "https://80000hours.org/podcast/episodes/paul-christiano-ai-alignment-solutions/": {
       "title": "How AI will dominate the 21st century & what to do about it",
       "description": "Dr Christiano is a researcher at the ML lab OpenAI who has thought a lot about how advanced AI will play out.",
@@ -28,6 +21,13 @@
       "image": "https://80000hours.org/wp-content/uploads/2020/06/Hey-Siri-iPad-AAPro-By-JQason-Zigrino-wallpaper.jpg",
       "site": "80,000 Hours",
       "icon": "https://80000hours.org/favicon-152.png"
+    },
+    "https://andyljones.com/posts/rl-debugging.html": {
+      "title": "Debugging Reinforcement Learning Systems",
+      "description": "Debugging reinforcement learning implementations, without the agonizing pain.",
+      "image": "https://andyljones.com/icons/robot-solid.png",
+      "site": "andyljones.com",
+      "icon": "https://andyljones.com/favicon.ico"
     },
     "https://arxiv.org/abs/1606.06565": {
       "title": "Concrete Problems in AI Safety",
@@ -99,9 +99,23 @@
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
     },
+    "https://arxiv.org/abs/1908.04734": {
+      "title": "Reward Tampering Problems and Solutions in Reinforcement Learning: A Causal Influence Diagram Perspective",
+      "description": "Can humans get arbitrarily capable reinforcement learning (RL) agents to do their bidding? Or will sufficiently capable RL agents always find ways to bypass their intended objectives by shortcutting their reward signal? This question impacts how far RL can be scaled, and whether alternative paradigms must be developed in order to build safe artificial general intelligence. In this paper, we study when an RL agent has an instrumental goal to tamper with its reward process, and describe design principles that prevent instrumental goals for two different types of reward tampering (reward function tampering and RF-input tampering). Combined, the design principles can prevent both types of reward tampering from being instrumental goals. The analysis benefits from causal influence diagrams to provide intuitive yet precise formalizations.",
+      "image": null,
+      "site": "arXiv.org",
+      "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
+    },
     "https://arxiv.org/abs/1908.09453": {
       "title": "OpenSpiel: A Framework for Reinforcement Learning in Games",
       "description": "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent) zero-sum, cooperative and general-sum, one-shot and sequential, strictly turn-taking and simultaneous-move, perfect and imperfect information games, as well as traditional multiagent environments such as (partially- and fully- observable) grid worlds and social dilemmas. OpenSpiel also includes tools to analyze learning dynamics and other common evaluation metrics. This document serves both as an overview of the code base and an introduction to the terminology, core concepts, and algorithms across the fields of reinforcement learning, computational game theory, and search.",
+      "image": null,
+      "site": "arXiv.org",
+      "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
+    },
+    "https://arxiv.org/abs/1909.07528": {
+      "title": "Emergent Tool Use From Multi-Agent Autocurricula",
+      "description": "Through multi-agent competition, the simple objective of hide-and-seek, and standard reinforcement learning algorithms at scale, we find that agents create a self-supervised autocurriculum inducing multiple distinct rounds of emergent strategy, many of which require sophisticated tool use and coordination. We find clear evidence of six emergent phases in agent strategy in our environment, each of which creates a new pressure for the opposing team to adapt; for instance, agents learn to build multi-object shelters using moveable boxes which in turn leads to agents discovering that they can overcome obstacles using ramps. We further provide evidence that multi-agent competition may scale better with increasing environment complexity and leads to behavior that centers around far more human-relevant skills than other self-supervised reinforcement learning methods such as intrinsic motivation. Finally, we propose transfer and fine-tuning as a way to quantitatively evaluate targeted capabilities, and we compare hide-and-seek agents to both intrinsic motivation and random initialization baselines in a suite of domain-specific intelligence tests.",
       "image": null,
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
@@ -116,6 +130,13 @@
     "https://arxiv.org/abs/2105.14111": {
       "title": "Goal Misgeneralization in Deep Reinforcement Learning",
       "description": "We study goal misgeneralization, a type of out-of-distribution generalization failure in reinforcement learning (RL). Goal misgeneralization failures occur when an RL agent retains its capabilities out-of-distribution yet pursues the wrong goal. For instance, an agent might continue to competently avoid obstacles, but navigate to the wrong place. In contrast, previous works have typically focused on capability generalization failures, where an agent fails to do anything sensible at test time. We formalize this distinction between capability and goal generalization, provide the first empirical demonstrations of goal misgeneralization, and present a partial characterization of its causes.",
+      "image": null,
+      "site": "arXiv.org",
+      "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
+    },
+    "https://arxiv.org/abs/2111.09259": {
+      "title": "Acquisition of Chess Knowledge in AlphaZero",
+      "description": "What is learned by sophisticated neural network agents such as AlphaZero? This question is of both scientific and practical interest. If the representations of strong neural networks bear no resemblance to human concepts, our ability to understand faithful explanations of their decisions will be restricted, ultimately limiting what we can achieve with neural network interpretability. In this work we provide evidence that human knowledge is acquired by the AlphaZero neural network as it trains on the game of chess. By probing for a broad range of human chess concepts we show when and where these concepts are represented in the AlphaZero network. We also provide a behavioural analysis focusing on opening play, including qualitative analysis from chess Grandmaster Vladimir Kramnik. Finally, we carry out a preliminary investigation looking at the low-level details of AlphaZero's representations, and make the resulting behavioural and representational analyses available online.",
       "image": null,
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
@@ -176,9 +197,9 @@
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
     },
-    "https://arxiv.org/abs/2309.00941": {
-      "title": "Emergent Linear Representations in World Models of Self-Supervised Sequence Models",
-      "description": "How do sequence models represent their decision-making process? Prior work suggests that Othello-playing neural network learned nonlinear models of the board state (Li et al., 2023). In this work, we provide evidence of a closely related linear representation of the board. In particular, we show that probing for \"my colour\" vs. \"opponent's colour\" may be a simple yet powerful way to interpret the model's internal state. This precise understanding of the internal representations allows us to control the model's behaviour with simple vector arithmetic. Linear representations enable significant interpretability progress, which we demonstrate with further exploration of how the world model is computed.",
+    "https://arxiv.org/abs/2310.08043": {
+      "title": "Understanding and Controlling a Maze-Solving Policy Network",
+      "description": "To understand the goals and goal representations of AI systems, we carefully study a pretrained reinforcement learning policy that solves mazes by navigating to a range of target squares. We find this network pursues multiple context-dependent goals, and we further identify circuits within the network that correspond to one of these goals. In particular, we identified eleven channels that track the location of the goal. By modifying these channels, either with hand-designed interventions or by combining forward passes, we can partially control the policy. We show that this network contains redundant, distributed, and retargetable goal representations, shedding light on the nature of goal-direction in trained policy networks.",
       "image": null,
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
@@ -193,6 +214,13 @@
     "https://arxiv.org/abs/2406.00877": {
       "title": "Evidence of Learned Look-Ahead in a Chess-Playing Neural Network",
       "description": "Do neural networks learn to implement algorithms such as look-ahead or search \"in the wild\"? Or do they rely purely on collections of simple heuristics? We present evidence of learned look-ahead in the policy network of Leela Chess Zero, the currently strongest neural chess engine. We find that Leela internally represents future optimal moves and that these representations are crucial for its final output in certain board states. Concretely, we exploit the fact that Leela is a transformer that treats every chessboard square like a token in language models, and give three lines of evidence (1) activations on certain squares of future moves are unusually important causally; (2) we find attention heads that move important information \"forward and backward in time,\" e.g., from squares of future moves to squares of earlier ones; and (3) we train a simple probe that can predict the optimal move 2 turns ahead with 92% accuracy (in board states where Leela finds a single best line). These findings are an existence proof of learned look-ahead in neural networks and might be a step towards a better understanding of their capabilities.",
+      "image": null,
+      "site": "arXiv.org",
+      "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
+    },
+    "https://arxiv.org/abs/2406.10162": {
+      "title": "Sycophancy to Subterfuge: Investigating Reward-Tampering in Large Language Models",
+      "description": "In reinforcement learning, specification gaming occurs when AI systems learn undesired behaviors that are highly rewarded due to misspecified training goals. Specification gaming can range from simple behaviors like sycophancy to sophisticated and pernicious behaviors like reward-tampering, where a model directly modifies its own reward mechanism. However, these more pernicious behaviors may be too complex to be discovered via exploration. In this paper, we study whether Large Language Model (LLM) assistants which find easily discovered forms of specification gaming will generalize to perform rarer and more blatant forms, up to and including reward-tampering. We construct a curriculum of increasingly sophisticated gameable environments and find that training on early-curriculum environments leads to more specification gaming on remaining environments. Strikingly, a small but non-negligible proportion of the time, LLM assistants trained on the full curriculum generalize zero-shot to directly rewriting their own reward function. Retraining an LLM not to game early-curriculum environments mitigates, but does not eliminate, reward-tampering in later environments. Moreover, adding harmlessness training to our gameable environments does not prevent reward-tampering. These results demonstrate that LLMs can generalize from common forms of specification gaming to more pernicious reward tampering and that such behavior may be nontrivial to remove.",
       "image": null,
       "site": "arXiv.org",
       "icon": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
@@ -225,10 +253,10 @@
       "site": "bkgm.com",
       "icon": "https://bkgm.com/favicon.ico"
     },
-    "https://bluedot.org/": {
-      "title": "BlueDot Impact | Have a positive impact on the trajectory of AI",
-      "description": "Free online courses, grants, and intensive in-person programs from the leading talent accelerator for beneficial AI and societal resilience. Join 10,000+ alumni and start today.",
-      "image": "https://bluedot.org/images/logo/link-preview-fallback.png",
+    "https://bluedot.org/courses/alignment": {
+      "title": "AI Alignment",
+      "description": "How do we ensure advanced AI systems act in line with human intentions?",
+      "image": "https://bluedot.org/images/courses/link-preview/alignment.png",
       "site": "BlueDot Impact",
       "icon": "https://bluedot.org/favicon.ico"
     },
@@ -239,6 +267,13 @@
       "site": "Brian Christian",
       "icon": "https://brianchristian.org/favicon.svg"
     },
+    "https://davidstarsilver.wordpress.com/teaching/": {
+      "title": "Teaching",
+      "description": "Advanced Topics  2015 (COMPM050/COMPGI13) Reinforcement Learning Video-lectures available here Lecture 1: Introduction to Reinforcement Learning Lecture 2: Markov Decision Processes Lecture 3: Plan…",
+      "image": "https://s0.wp.com/i/blank.jpg?m=1383295312i",
+      "site": "David Silver",
+      "icon": "https://s1.wp.com/i/favicon.ico?m=1713425267i"
+    },
     "https://deepmind.google/discover/blog/how-undesired-goals-can-arise-with-correct-rewards/": {
       "title": "How undesired goals can arise with correct rewards",
       "description": "As we build increasingly advanced artificial intelligence (AI) systems, we want to make sure they don’t pursue undesired goals. Such behaviour in an AI agent is often the result of specification gaming – exploiting a poor choice of what they are rewarded for. In our latest paper, we explore a more subtle mechanism by which AI systems may unintentionally learn to pursue undesired goals: goal misgeneralisation (GMG). GMG occurs when a system's capabilities generalise successfully but its goal does not generalise as desired, so the system competently pursues the wrong goal. Crucially, in contrast to specification gaming, GMG can occur even when the AI system is trained with a correct specification.",
@@ -246,38 +281,31 @@
       "site": "Google DeepMind",
       "icon": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/icons/google_deepmind_2x_96dp.png"
     },
-    "https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/": {
-      "title": "Specification gaming: the flip side of AI ingenuity",
-      "description": "Specification gaming is a behaviour that satisfies the literal specification of an objective without achieving the intended outcome. We have all had experiences with specification gaming, even if not by this name. Readers may have heard the myth of King Midas and the golden touch, in which the king asks that anything he touches be turned to gold - but soon finds that even food and drink turn to metal in his hands. In the real world, when rewarded for doing well on a homework assignment, a student might copy another student to get the right answers, rather than learning the material - and thus exploit a loophole in the task specification.",
-      "image": "https://lh3.googleusercontent.com/xWlTOih-l_rDP2E8_sw6x_gv-gEhnkA627h5irqE9fKsRKkgsX0lSqgd2VfkIOuEiEoTN178uWGqgzSviKw2yH9DCQLWQkp8YjYk0bTtxVYRhLJtHlw=w1200-h630-n-nu-rw",
-      "site": "Google DeepMind",
-      "icon": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/icons/google_deepmind_2x_96dp.png"
-    },
-    "https://en.wikipedia.org/wiki/Human_Compatible": {
-      "title": "Human Compatible - Wikipedia",
-      "description": null,
-      "image": "https://upload.wikimedia.org/wikipedia/en/d/db/Human_Compatible_%28Stuart_J._Russell%2C_2019%29_book_cover.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
-      "site": "en.wikipedia.org",
-      "icon": "https://en.wikipedia.org/static/apple-touch/wikipedia.png"
-    },
     "https://github.com/ARENA-education/ARENA_materials": {
       "title": "GitHub - ARENA-education/ARENA_materials",
       "description": "Contribute to ARENA-education/ARENA_materials development by creating an account on GitHub.",
-      "image": "https://opengraph.githubassets.com/92f7990f53687d964365f75cd2fdd903639ac492070229091b3998ca516a2701/ARENA-education/ARENA_materials",
+      "image": "https://opengraph.githubassets.com/16b34a045f750c1c8821f39c78f93d249df4faf9ca2a048d97836cf5d322db57/ARENA-education/ARENA_materials",
       "site": "GitHub",
       "icon": "https://github.com/fluidicon.png"
     },
     "https://github.com/google-deepmind/open_spiel": {
       "title": "GitHub - google-deepmind/open_spiel: OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games.",
       "description": "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. - google-deepmind/open_spiel",
-      "image": "https://opengraph.githubassets.com/fd8061adee9a2a0055489170ae48e619d5f305caaac78eac3578abc9c3e5ab38/google-deepmind/open_spiel",
+      "image": "https://opengraph.githubassets.com/2b67c7a49af7c7e802b0a4f47e22ad21d0108e22b57ca0f17127e7e2844a08df/google-deepmind/open_spiel",
+      "site": "GitHub",
+      "icon": "https://github.com/fluidicon.png"
+    },
+    "https://github.com/suragnair/alpha-zero-general": {
+      "title": "GitHub - suragnair/alpha-zero-general: A clean implementation based on AlphaZero for any game in any framework + tutorial + Othello/Gobang/TicTacToe/Connect4 and more",
+      "description": "A clean implementation based on AlphaZero for any game in any framework + tutorial + Othello/Gobang/TicTacToe/Connect4 and more - suragnair/alpha-zero-general",
+      "image": "https://opengraph.githubassets.com/bfb7edbedc7c9e14a49247a334fca03575eb41d2a1e0a5f9ea9c3a0473ed5caa/suragnair/alpha-zero-general",
       "site": "GitHub",
       "icon": "https://github.com/fluidicon.png"
     },
     "https://github.com/vwxyzjn/cleanrl": {
       "title": "GitHub - vwxyzjn/cleanrl: High-quality single file implementation of Deep Reinforcement Learning algorithms with research-friendly features (PPO, DQN, C51, DDPG, TD3, SAC, PPG)",
       "description": "High-quality single file implementation of Deep Reinforcement Learning algorithms with research-friendly features (PPO, DQN, C51, DDPG, TD3, SAC, PPG) - vwxyzjn/cleanrl",
-      "image": "https://opengraph.githubassets.com/e2152d4a18aa97811565d697e4dbfbd74af77986d9eeae8fecaf93986e836e4a/vwxyzjn/cleanrl",
+      "image": "https://opengraph.githubassets.com/ed578d55496a62eb020a78af33d96f758058a8ba720a4633cb4716dee2cc9fce/vwxyzjn/cleanrl",
       "site": "GitHub",
       "icon": "https://github.com/fluidicon.png"
     },
@@ -287,13 +315,6 @@
       "image": "https://gymnasium.farama.org/_static/img/gymnasium-github.png",
       "site": "gymnasium.farama.org",
       "icon": "https://gymnasium.farama.org/_static/favicon.png"
-    },
-    "https://huggingface.co/learn/deep-rl-course/unit0/introduction": {
-      "title": "Welcome to the 🤗 Deep Reinforcement Learning Course · Hugging Face",
-      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-      "image": "https://cdn-thumbnails.huggingface.co/social-thumbnails/learn/deep-rl-course/unit0/introduction.png",
-      "site": "huggingface.co",
-      "icon": "https://huggingface.co/favicon.ico"
     },
     "https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/": {
       "title": "The 37 Implementation Details of Proximal Policy Optimization · The ICLR Blog Track",
@@ -379,6 +400,13 @@
       "site": "numpy.org",
       "icon": "https://numpy.org/images/favicon.ico"
     },
+    "https://people.eecs.berkeley.edu/~russell/hc.html": {
+      "title": "Stuart Russell -- Human Compatible",
+      "description": null,
+      "image": null,
+      "site": "people.eecs.berkeley.edu",
+      "icon": "https://people.eecs.berkeley.edu/favicon.ico"
+    },
     "https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf": {
       "title": null,
       "description": null,
@@ -428,12 +456,12 @@
       "site": "spinningup.openai.com",
       "icon": "https://spinningup.openai.com/en/latest/_static/openai_icon.ico"
     },
-    "https://thegradient.pub/othello/": {
-      "title": "Large Language Model: world models or surface statistics?",
-      "description": "A mystery\n\nLarge Language Models (LLM) are on fire, capturing public attention by their ability to provide seemingly impressive completions to user prompts (NYT coverage). They are a delicate combination of a radically simplistic algorithm with massive amounts of data and computing power. They are trained by playing a guess-the-next-word",
-      "image": "https://thegradient.pub/content/images/2023/01/DALL-E-2022-12-05-10.28.34---remove-erased-ares-1.png",
-      "site": "The Gradient",
-      "icon": "https://thegradient.pub/content/images/size/w256h256/2018/02/icon.png"
+    "https://suragnair.github.io/posts/alphazero.html": {
+      "title": "Simple Alpha Zero",
+      "description": null,
+      "image": "http://web.stanford.edu/~surag/posts/images/earlygame.png",
+      "site": "suragnair.github.io",
+      "icon": "http://stanford.edu/favicon.ico"
     },
     "https://transformerlensorg.github.io/TransformerLens/": {
       "title": "TransformerLens Documentation",
@@ -463,26 +491,12 @@
       "site": "alexirpan.com",
       "icon": "https://www.alexirpan.com/apple-touch-icon.png"
     },
-    "https://www.alignmentforum.org/posts/kcKrE9mzEHrdqtDpE/the-case-for-ensuring-that-powerful-ais-are-controlled": {
-      "title": "The case for ensuring that powerful AIs are controlled — AI Alignment Forum",
-      "description": "In this post, we argue that AI labs should ensure that powerful AIs are controlled. That is, labs should make sure that the safety measures they appl…",
-      "image": "https://res.cloudinary.com/lesswrong-2-0/image/upload/v1654295382/new_mississippi_river_fjdmww.jpg",
-      "site": "alignmentforum.org",
-      "icon": "https://res.cloudinary.com/dq3pms5lt/image/upload/v1531267596/alignmentForum_favicon_o9bjnl.png"
-    },
     "https://www.anthropic.com/research/emergent-misalignment-reward-hacking": {
       "title": "Natural emergent misalignment from reward hacking",
       "description": "We show for the first time that realistic AI training processes can accidentally produce misaligned models.",
       "image": "https://www-cdn.anthropic.com/images/4zrzovbb/website/cbe59a69a76f6c6cc4517a8185c597481fa207a5-1200x630.jpg",
       "site": "anthropic.com",
       "icon": "https://www.anthropic.com/favicon.ico"
-    },
-    "https://www.davidsilver.uk/teaching/": {
-      "title": "Teaching",
-      "description": "Advanced Topics  2015 (COMPM050/COMPGI13) Reinforcement Learning Video-lectures available here Lecture 1: Introduction to Reinforcement Learning Lecture 2: Markov Decision Processes Lecture 3: Plan…",
-      "image": "https://s0.wp.com/i/blank.jpg?m=1383295312i",
-      "site": "David Silver",
-      "icon": "https://s1.wp.com/i/favicon.ico?m=1713425267i"
     },
     "https://www.dwarkesh.com/p/andrej-karpathy": {
       "title": "Andrej Karpathy — AGI is still a decade away",
@@ -579,13 +593,6 @@
       "title": "Intro to AI Safety, Remastered",
       "description": "Video by Robert Miles AI Safety ",
       "image": "https://i.ytimg.com/vi/pYXy-A4siMw/hqdefault.jpg",
-      "site": "YouTube",
-      "icon": "https://www.youtube.com/favicon.ico"
-    },
-    "https://www.youtube.com/watch?v=tlOIHko8ySg": {
-      "title": "CoastRunners 7",
-      "description": "Video by Jack Clark",
-      "image": "https://i.ytimg.com/vi/tlOIHko8ySg/hqdefault.jpg",
       "site": "YouTube",
       "icon": "https://www.youtube.com/favicon.ico"
     },
