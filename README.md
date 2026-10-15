@@ -1,6 +1,6 @@
 # Alignment Through Games
 
-A 12-month learning path on how AI agents learn rules and pursue goals, and on the alignment control problem, taught through games.
+A learning path on how AI agents learn rules and pursue goals, and on the alignment control problem, taught through games.
 
 **Live site:** https://nikob-dev.github.io/alignment-through-games/
 
@@ -8,16 +8,25 @@ A 12-month learning path on how AI agents learn rules and pursue goals, and on t
 
 | File | Purpose |
 |---|---|
-| `curriculum.json` | **All content**: modules, readings, labs, done-checks, resources, progress log |
-| `index.html` | Page shell |
-| `app.js` | Renders `curriculum.json` (ES module, no build step) |
-| `styles.css` | Theme tokens, light/dark, mobile-first layout |
+| `curriculum.json` | **All content**: modules and the resource library |
+| `previews.json` | Generated link-preview metadata (thumbnail, site, favicon) for each library URL |
+| `index.html`, `app.js`, `styles.css` | Static page that renders the two JSON files (no build step) |
+| `scripts/check_curriculum.py` | Validates fields and id references |
+| `scripts/fetch_previews.py` | Regenerates `previews.json` |
 
 ## Editing
 
-- **Update progress:** set a module's `status` to `planned`, `next`, `active`, or `done`, and add an entry to `log`.
-- **Add a reading:** append `{ "kind", "title", "url", "note" }` to that module's `theory`.
-- Commit and push. GitHub Pages redeploys in about a minute.
+- **Add a resource:** append to `library` with `id`, `kind` (book/course/video/blog/podcast/paper/tool), `title`, `url`, `note`, and `modules` (e.g. `["m4"]`). It shows up in those module cards and in the library.
+- **Add a tool to a module:** add a `kind: "tool"` library entry, then list its id in that module's `tools`.
+- **Update progress:** set a module's `status` to `planned`, `next`, `active`, or `done`.
+- Then run:
+
+```sh
+python3 scripts/check_curriculum.py
+python3 scripts/fetch_previews.py
+```
+
+Commit and push. GitHub Pages redeploys in about a minute.
 
 ## Preview locally
 

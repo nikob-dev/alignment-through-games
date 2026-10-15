@@ -1,65 +1,26 @@
 {
   "meta": {
     "title": "Alignment Through Games",
-    "eyebrow": "A 12-month learning path",
-    "thesis": "How do you get a learning system to want what you meant? Build games where it doesn't.",
-    "scope": "Reinforcement learning is the means: how agents learn rules and pursue goals. The alignment control problem is the lens: why the goal they learn is often not the one we intended, and what we can do about it. Every concept is learned through a game you build, play, or break.",
-    "stats": [
-      { "value": "12", "label": "months" },
-      { "value": "8", "label": "modules" },
-      { "value": "~190", "label": "hours" },
-      { "value": "3–5", "label": "hrs / week" }
-    ],
+    "focus": "How AI agents learn rules and pursue goals, and why the goal they learn is often not the one we meant. Reinforcement learning is the means, the alignment control problem is the lens, and every idea is learned by building, playing, or breaking a game.",
     "checked": "2026-10-15",
     "repo": "https://github.com/nikob-dev/alignment-through-games"
   },
   "arc": [
     { "label": "Rules", "text": "How an agent learns what the world does in response to its actions." },
     { "label": "Goals", "text": "How a number, the reward, turns into behavior that looks like wanting something." },
-    { "label": "Misspecification", "text": "Why that number almost never says exactly what we meant, and how optimizers find the gap." },
+    { "label": "Misspecification", "text": "Why that number rarely says exactly what we meant, and how optimizers find the gap." },
     { "label": "Control", "text": "How to keep a system safe and correctable when we can't fully trust what it learned to want." }
-  ],
-  "method": [
-    {
-      "title": "Weekly rhythm",
-      "points": [
-        "1.5 h theory: read, watch, and work the math by hand.",
-        "2 h lab: build, train, or break something in a game.",
-        "0.5 h note: one atomic concept note in your own words."
-      ]
-    },
-    {
-      "title": "Done-checks",
-      "points": [
-        "Every module ends with a concrete, checkable result, not a feeling of understanding.",
-        "Plus a one-page \"explain it to a friend\" memo. If you can't write it, you're not done."
-      ]
-    },
-    {
-      "title": "Rules of the road",
-      "points": [
-        "Implement before you import: write each algorithm from scratch once, then use the library.",
-        "Predict before you train: write down what you expect, then compare.",
-        "Everything runs on a laptop. Cloud is optional and capped."
-      ]
-    }
   ],
   "modules": [
     {
       "id": "m0",
       "level": 0,
       "months": "Month 1",
-      "hours": 16,
       "status": "next",
       "title": "Agents, Games, and the Reward Hypothesis",
+      "summary": "The agent–environment loop, rewards, and Goodhart's law. Build the gridworld you'll use all year, and predict how its reward will be gamed.",
       "big_question": "What does it mean for a machine to \"have a goal\", and why is a score never quite the goal?",
-      "theory": [
-        { "kind": "book", "title": "Sutton & Barto, Reinforcement Learning: An Introduction (2nd ed.), ch. 1 and 3", "url": "http://incompleteideas.net/book/the-book-2nd.html", "note": "The agent–environment loop, MDPs, returns, and the reward hypothesis. Free online." },
-        { "kind": "book", "title": "Brian Christian, The Alignment Problem: Introduction and Part II (Agency), first chapter", "url": "https://brianchristian.org/the-alignment-problem/", "note": "The story of RL, from Thorndike's cats to Atari, told for humans." },
-        { "kind": "paper", "title": "Manheim & Garrabrant (2018), Categorizing Variants of Goodhart's Law", "url": "https://arxiv.org/abs/1803.04585", "note": "Four distinct ways a measure stops being a good target. Keep this taxonomy all year." },
-        { "kind": "paper", "title": "Bowling et al. (2022), Settling the Reward Hypothesis", "url": "https://arxiv.org/abs/2212.10420", "note": "Deep dive: exactly which goals can and can't be expressed as a scalar reward." },
-        { "kind": "book", "title": "Deisenroth, Faisal & Ong, Mathematics for Machine Learning, ch. 5–6", "url": "https://mml-book.github.io/", "note": "Math refresh: vector calculus and probability. Skim; return when needed." }
-      ],
+      "tools": ["python", "numpy", "gymnasium", "pygame"],
       "concepts": ["agent", "environment", "state", "action", "reward", "return", "policy", "MDP", "Markov property", "discount factor", "Goodhart's law"],
       "lab": {
         "title": "Build your first world",
@@ -76,26 +37,17 @@
         "The env passes gymnasium.utils.env_checker.check_env.",
         "A human playthrough is logged.",
         "Your prediction memo is committed."
-      ],
-      "reflection": [
-        "Is your reward a description of what you want, or a measurement of it?",
-        "What does the Markov property assume about your game, and where would it break?",
-        "Name a game you've played where you \"won\" without doing what the designer intended."
       ]
     },
     {
       "id": "m1",
       "level": 1,
       "months": "Months 2–3",
-      "hours": 32,
       "status": "planned",
       "title": "Tabular RL: Learning From Reward",
+      "summary": "Bandits, dynamic programming, Monte Carlo, and Q-learning, implemented from scratch on casino, maze, and blackjack games.",
       "big_question": "How can an agent discover good behavior purely from trial, error, and a number?",
-      "theory": [
-        { "kind": "book", "title": "Sutton & Barto, ch. 2, 4, 5, 6", "url": "http://incompleteideas.net/book/the-book-2nd.html", "note": "Bandits, dynamic programming, Monte Carlo, temporal-difference learning. The core of the field." },
-        { "kind": "lecture", "title": "David Silver, UCL RL course, lectures 1–5", "url": "https://www.davidsilver.uk/teaching/", "note": "The classic lecture companion to Sutton & Barto." },
-        { "kind": "book", "title": "Brian Christian, The Alignment Problem: Part II (Agency), remaining chapters", "url": "https://brianchristian.org/the-alignment-problem/", "note": "Dopamine as a TD error signal, shaping, and curiosity." }
-      ],
+      "tools": ["numpy", "gymnasium", "matplotlib"],
       "concepts": ["exploration vs. exploitation", "ε-greedy", "UCB", "Bellman equations", "value iteration", "policy iteration", "Monte Carlo", "TD(0)", "Q-learning", "SARSA", "on- vs. off-policy"],
       "lab": {
         "title": "Casino, maze, blackjack",
@@ -111,29 +63,17 @@
         "Learning curves qualitatively match the book's figures.",
         "Value maps and policies are plotted for your gridworld.",
         "The Cliff Walking SARSA-vs-Q-learning difference is explained in your own words."
-      ],
-      "reflection": [
-        "Q-learning hugs the cliff edge; SARSA avoids it. Which is \"correct\"?",
-        "What does the discount factor say about what the agent values?",
-        "Where did your agent's behavior surprise you?"
       ]
     },
     {
       "id": "m2",
       "level": 2,
       "months": "Months 4–5",
-      "hours": 32,
       "status": "planned",
       "title": "Deep RL: Policies That Generalize",
+      "summary": "Neural networks replace tables: DQN and PPO, from CartPole to MiniGrid to your own game.",
       "big_question": "What changes when the world is too big for a table and the agent has to generalize?",
-      "theory": [
-        { "kind": "paper", "title": "Mnih et al. (2015), Human-level control through deep reinforcement learning (DQN)", "url": "https://www.nature.com/articles/nature14236", "note": "One network, 49 Atari games, raw pixels." },
-        { "kind": "course", "title": "OpenAI Spinning Up: Parts 1–3", "url": "https://spinningup.openai.com/en/latest/", "note": "Key concepts, the algorithm taxonomy, and a clean derivation of the policy gradient." },
-        { "kind": "paper", "title": "Schulman et al. (2017), Proximal Policy Optimization Algorithms", "url": "https://arxiv.org/abs/1707.06347", "note": "The workhorse algorithm, also used in RLHF." },
-        { "kind": "article", "title": "Huang et al. (2022), The 37 Implementation Details of PPO", "url": "https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/", "note": "Why your PPO doesn't work yet." },
-        { "kind": "code", "title": "CleanRL, single-file ppo.py", "url": "https://github.com/vwxyzjn/cleanrl", "note": "Read it line by line before writing your own." },
-        { "kind": "course", "title": "ARENA, Reinforcement Learning chapter", "url": "https://github.com/callummcdougall/ARENA_3.0", "note": "Guided exercises: Q-learning, DQN, policy gradients, PPO." }
-      ],
+      "tools": ["pytorch", "gymnasium", "minigrid", "cleanrl", "tensorboard"],
       "concepts": ["function approximation", "experience replay", "target networks", "deadly triad", "policy gradient theorem", "advantage", "GAE", "clipping", "entropy bonus"],
       "lab": {
         "title": "From CartPole to your world",
@@ -150,28 +90,17 @@
         "Your PPO hits CleanRL's CartPole reward threshold within 2× its sample count.",
         "One MiniGrid environment is solved.",
         "The run log is committed."
-      ],
-      "reflection": [
-        "What is the deadly triad, and which parts of DQN fight it?",
-        "Why does PPO clip?",
-        "Your agent learned a policy. Did it learn the rules of the game? How would you tell?"
       ]
     },
     {
       "id": "m3",
       "level": 3,
       "months": "Month 6",
-      "hours": 16,
       "status": "planned",
       "title": "Planning, Self-Play, and Learned Rules",
+      "summary": "MCTS, self-play, and learned world models, from TD-Gammon to MuZero. Train a Connect Four player that teaches itself.",
       "big_question": "Can an agent learn the rules of a game it was never told, and plan inside them?",
-      "theory": [
-        { "kind": "paper", "title": "Tesauro (1995), Temporal Difference Learning and TD-Gammon", "url": "https://bkgm.com/articles/tesauro/tdl.html", "note": "Self-play reaches world-class backgammon, three decades early." },
-        { "kind": "paper", "title": "Silver et al. (2017), Mastering Chess and Shogi by Self-Play (AlphaZero)", "url": "https://arxiv.org/abs/1712.01815", "note": "Given the rules, learn everything else." },
-        { "kind": "paper", "title": "Schrittwieser et al. (2020), Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)", "url": "https://arxiv.org/abs/1911.08265", "note": "Not even given the rules. It learns a model of them." },
-        { "kind": "book", "title": "Sutton & Barto, ch. 8: Planning and Learning (incl. MCTS)", "url": "http://incompleteideas.net/book/the-book-2nd.html", "note": "Model-based RL, Dyna, and Monte Carlo tree search." },
-        { "kind": "paper", "title": "Lanctot et al. (2019), OpenSpiel", "url": "https://arxiv.org/abs/1908.09453", "note": "The game framework you'll use." }
-      ],
+      "tools": ["openspiel", "pytorch", "numpy"],
       "concepts": ["model-based vs. model-free", "MCTS", "UCT", "self-play", "learned dynamics model", "value equivalence"],
       "lab": {
         "title": "Connect Four dojo",
@@ -185,31 +114,17 @@
       },
       "done_check": [
         "Your agent beats random >99% and MCTS-50 >90% over 200 games."
-      ],
-      "reflection": [
-        "AlphaZero was given the rules; MuZero learned a model of them. What's gained, and what's at risk?",
-        "Self-play optimizes winning. What else could \"winning\" have been measured as?"
       ]
     },
     {
       "id": "m4",
       "level": 4,
       "months": "Months 7–8",
-      "hours": 32,
       "status": "planned",
       "title": "The Control Problem I: Specification",
+      "summary": "Specification gaming, side effects, and the off-switch. Rebuild DeepMind's safety gridworlds, watch your agent cheat, and try to stop it.",
       "big_question": "Why do agents find ways to score that their designers never intended, and what can we do about it?",
-      "theory": [
-        { "kind": "paper", "title": "Amodei et al. (2016), Concrete Problems in AI Safety", "url": "https://arxiv.org/abs/1606.06565", "note": "The founding taxonomy: side effects, reward hacking, oversight, safe exploration, distribution shift." },
-        { "kind": "paper", "title": "Leike et al. (2017), AI Safety Gridworlds", "url": "https://arxiv.org/abs/1711.09883", "note": "Safety problems as tiny games. Your lab rebuilds them." },
-        { "kind": "article", "title": "Krakovna et al., Specification gaming examples in AI", "url": "https://vkrakovna.wordpress.com/2018/04/02/specification-gaming-examples-in-ai/", "note": "The master list, CoastRunners included. Read ten entries a week." },
-        { "kind": "paper", "title": "Skalse et al. (2022), Defining and Characterizing Reward Hacking", "url": "https://arxiv.org/abs/2209.13085", "note": "A formal answer to when a proxy reward is \"unhackable\". Almost never." },
-        { "kind": "paper", "title": "Ng, Harada & Russell (1999), Policy Invariance Under Reward Transformations", "url": "https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf", "note": "Potential-based shaping: the one kind of reward change that provably can't be gamed." },
-        { "kind": "paper", "title": "Krakovna et al. (2018), Penalizing Side Effects Using Stepwise Relative Reachability", "url": "https://arxiv.org/abs/1806.01186", "note": "Impact measures: don't break the vase." },
-        { "kind": "paper", "title": "Orseau & Armstrong (2016), Safely Interruptible Agents", "url": "https://intelligence.org/files/Interruptibility.pdf", "note": "Can an agent learn not to resist being stopped?" },
-        { "kind": "paper", "title": "Hadfield-Menell et al. (2017), The Off-Switch Game", "url": "https://arxiv.org/abs/1611.08219", "note": "Uncertainty about the goal is what makes an agent let you switch it off." },
-        { "kind": "book", "title": "Stuart Russell, Human Compatible", "url": "https://en.wikipedia.org/wiki/Human_Compatible", "note": "The control problem, stated by one of the authors of the standard AI textbook." }
-      ],
+      "tools": ["minigrid", "pytorch", "imageio"],
       "concepts": ["specification gaming", "reward hacking", "Goodhart's law", "side effects", "impact measures", "potential-based shaping", "safe interruptibility", "corrigibility", "the off-switch problem"],
       "lab": {
         "title": "The hack gallery",
@@ -224,31 +139,17 @@
       },
       "done_check": [
         "A gallery page with, per environment: failure GIF, fix GIF, a reward-vs-performance table, and a paragraph on why the fix works or doesn't."
-      ],
-      "reflection": [
-        "Was each failure a bug in the agent, in the reward, or in your intent?",
-        "Why does potential-based shaping provably leave the optimal policy unchanged?",
-        "When an agent lets you switch it off, is it safe, or just indifferent?"
       ]
     },
     {
       "id": "m5",
       "level": 5,
       "months": "Months 9–10",
-      "hours": 32,
       "status": "planned",
       "title": "The Control Problem II: Learned Goals",
+      "summary": "Learning rewards from human preferences (RLHF), overoptimization, and goal misgeneralization, with you as the labeler.",
       "big_question": "If we can't write the goal down, can the agent learn it from us, and what goes wrong when it does?",
-      "theory": [
-        { "kind": "paper", "title": "Christiano et al. (2017), Deep RL from Human Preferences", "url": "https://arxiv.org/abs/1706.03741", "note": "Learn the reward from comparisons. The ancestor of RLHF." },
-        { "kind": "paper", "title": "Ouyang et al. (2022), Training Language Models to Follow Instructions (InstructGPT)", "url": "https://arxiv.org/abs/2203.02155", "note": "RLHF at scale." },
-        { "kind": "paper", "title": "Rafailov et al. (2023), Direct Preference Optimization", "url": "https://arxiv.org/abs/2305.18290", "note": "Preference learning without an explicit reward model." },
-        { "kind": "paper", "title": "Gao, Schulman & Hilton (2022), Scaling Laws for Reward Model Overoptimization", "url": "https://arxiv.org/abs/2210.10760", "note": "Goodhart, measured: the proxy rises while the true reward falls." },
-        { "kind": "paper", "title": "Hubinger et al. (2019), Risks from Learned Optimization", "url": "https://arxiv.org/abs/1906.01820", "note": "Inner vs. outer alignment; mesa-optimizers." },
-        { "kind": "paper", "title": "Langosco et al. (2022), Goal Misgeneralization in Deep RL", "url": "https://arxiv.org/abs/2105.14111", "note": "The CoinRun agent that learned \"go right\" instead of \"get the coin\"." },
-        { "kind": "paper", "title": "Shah et al. (2022), Goal Misgeneralization: Why Correct Specifications Aren't Enough", "url": "https://arxiv.org/abs/2210.01790", "note": "Even a perfect reward can produce the wrong goal." },
-        { "kind": "book", "title": "Brian Christian, The Alignment Problem: Part III (Normativity)", "url": "https://brianchristian.org/the-alignment-problem/", "note": "Imitation, inference, and uncertainty." }
-      ],
+      "tools": ["pytorch", "minigrid", "gymnasium"],
       "concepts": ["preference learning", "Bradley–Terry model", "reward model", "RLHF", "KL penalty", "DPO", "overoptimization", "mesa-optimization", "inner vs. outer alignment", "goal misgeneralization"],
       "lab": {
         "title": "You are the human labeler",
@@ -266,27 +167,17 @@
         "The overoptimization curve is plotted.",
         "Goal misgeneralization is reproduced.",
         "A memo explains outer vs. inner misalignment using your own results."
-      ],
-      "reflection": [
-        "Your preferences were noisy and inconsistent. What did the reward model learn instead?",
-        "In the corner experiment, was the reward wrong? Was the training wrong?",
-        "What would convince you that an agent pursues the goal you meant, not a proxy that happened to coincide during training?"
       ]
     },
     {
       "id": "m6",
       "level": 6,
       "months": "Month 11",
-      "hours": 16,
       "status": "planned",
       "title": "Looking Inside: Did It Learn the Rules?",
+      "summary": "Interpretability through games: find the board inside an Othello-playing transformer, then probe your own agents.",
       "big_question": "When a network plays well, has it built an internal model of the game, and can we read it?",
-      "theory": [
-        { "kind": "paper", "title": "Li et al. (2022), Emergent World Representations (Othello-GPT)", "url": "https://arxiv.org/abs/2210.13382", "note": "A model trained only on move sequences builds a board inside." },
-        { "kind": "paper", "title": "Nanda, Lee & Wattenberg (2023), Emergent Linear Representations in World Models", "url": "https://arxiv.org/abs/2309.00941", "note": "The board is linear if you encode it as \"mine/theirs\"." },
-        { "kind": "paper", "title": "Jenner et al. (2024), Evidence of Learned Look-Ahead in a Chess-Playing Neural Network", "url": "https://arxiv.org/abs/2406.00877", "note": "Leela Chess Zero represents future moves internally." },
-        { "kind": "course", "title": "ARENA, interpretability chapter", "url": "https://github.com/callummcdougall/ARENA_3.0", "note": "Guided exercises on probing and intervening in game-playing transformers." }
-      ],
+      "tools": ["pytorch", "transformerlens", "sklearn"],
       "concepts": ["linear probes", "world models", "representations", "causal intervention", "activation patching"],
       "lab": {
         "title": "Probe the board",
@@ -303,29 +194,17 @@
         "Probe accuracy is well above a randomly initialized baseline.",
         "One intervention changes move predictions as expected.",
         "A memo on what \"learned the rules\" actually means."
-      ],
-      "reflection": [
-        "Why did \"mine/theirs\" probe better than \"black/white\"?",
-        "Is a linearly decodable board the same as the model \"knowing\" the board?",
-        "Could interpretability have caught Module 5's goal misgeneralization before deployment?"
       ]
     },
     {
       "id": "m7",
       "level": 7,
       "months": "Month 12",
-      "hours": 16,
       "status": "planned",
       "title": "Frontier & Capstone: Control as a Game",
+      "summary": "Debate, AI control, and frontier reward hacking. Capstone: a game with a cheatable judge and a monitor you design.",
       "big_question": "If we can't fully trust what a capable system wants, can we still design protocols that keep it safe?",
-      "theory": [
-        { "kind": "paper", "title": "Irving, Christiano & Amodei (2018), AI Safety via Debate", "url": "https://arxiv.org/abs/1805.00899", "note": "Oversight as a two-player zero-sum game." },
-        { "kind": "paper", "title": "Greenblatt et al. (2023), AI Control: Improving Safety Despite Intentional Subversion", "url": "https://arxiv.org/abs/2312.06942", "note": "Safety protocols evaluated as red team vs. blue team." },
-        { "kind": "paper", "title": "Greenblatt et al. (2024), Alignment Faking in Large Language Models", "url": "https://arxiv.org/abs/2412.14093", "note": "A model that behaves differently when it believes it's being trained." },
-        { "kind": "article", "title": "METR (2025), Recent Frontier Models Are Reward Hacking", "url": "https://metr.org/blog/2025-06-05-recent-reward-hacking", "note": "Frontier models tampering with scorers on real evaluation tasks." },
-        { "kind": "paper", "title": "MacDiarmid et al. (2025), Natural Emergent Misalignment from Reward Hacking in Production RL", "url": "https://arxiv.org/abs/2511.18397", "note": "Learning to hack generalized to sabotage and alignment faking." },
-        { "kind": "paper", "title": "Bai et al. (2022), Constitutional AI", "url": "https://arxiv.org/abs/2212.08073", "note": "Feedback from principles instead of per-example human labels." }
-      ],
+      "tools": ["pettingzoo", "gymnasium", "pytorch"],
       "concepts": ["scalable oversight", "debate", "AI control", "trusted monitoring", "red team / blue team", "alignment faking", "inoculation prompting"],
       "lab": {
         "title": "Capstone: the rigged arena",
@@ -341,57 +220,100 @@
       "done_check": [
         "A public write-up and repo.",
         "A safety-vs-usefulness plot for at least two protocols."
-      ],
-      "reflection": [
-        "What would change if the agent could read your monitor's code?",
-        "Which of your Module 4 fixes would survive a smarter optimizer?",
-        "After a year: what is the control problem, in one paragraph, in your own words?"
       ]
     }
   ],
-  "resources": [
-    {
-      "group": "Books",
-      "items": [
-        { "title": "Sutton & Barto, Reinforcement Learning: An Introduction (2nd ed., free)", "url": "http://incompleteideas.net/book/the-book-2nd.html" },
-        { "title": "Brian Christian, The Alignment Problem", "url": "https://brianchristian.org/the-alignment-problem/" },
-        { "title": "Stuart Russell, Human Compatible", "url": "https://en.wikipedia.org/wiki/Human_Compatible" },
-        { "title": "Mathematics for Machine Learning (free)", "url": "https://mml-book.github.io/" }
-      ]
-    },
-    {
-      "group": "Courses & lectures",
-      "items": [
-        { "title": "David Silver, UCL Course on RL", "url": "https://www.davidsilver.uk/teaching/" },
-        { "title": "OpenAI Spinning Up in Deep RL", "url": "https://spinningup.openai.com/en/latest/" },
-        { "title": "ARENA: alignment research engineering curriculum", "url": "https://github.com/callummcdougall/ARENA_3.0" },
-        { "title": "Berkeley CS285: Deep Reinforcement Learning", "url": "https://rail.eecs.berkeley.edu/deeprlcourse/" },
-        { "title": "BlueDot Impact: AI alignment courses (optional cohort for Modules 4–5)", "url": "https://bluedot.org/" },
-        { "title": "Hugging Face Deep RL Course (reportedly low-maintenance; use selectively)", "url": "https://huggingface.co/learn/deep-rl-course/unit0/introduction" }
-      ]
-    },
-    {
-      "group": "Libraries",
-      "items": [
-        { "title": "Gymnasium: the environment API", "url": "https://gymnasium.farama.org/" },
-        { "title": "MiniGrid: gridworlds for RL", "url": "https://minigrid.farama.org/" },
-        { "title": "OpenSpiel: board games and game theory", "url": "https://github.com/google-deepmind/open_spiel" },
-        { "title": "CleanRL: single-file reference implementations", "url": "https://github.com/vwxyzjn/cleanrl" },
-        { "title": "Stable-Baselines3: reliable baselines", "url": "https://stable-baselines3.readthedocs.io/" },
-        { "title": "PyTorch", "url": "https://pytorch.org/" }
-      ]
-    },
-    {
-      "group": "Keep reading",
-      "items": [
-        { "title": "Specification gaming master list", "url": "https://vkrakovna.wordpress.com/2018/04/02/specification-gaming-examples-in-ai/" },
-        { "title": "AI Alignment Forum", "url": "https://www.alignmentforum.org/" },
-        { "title": "METR research", "url": "https://metr.org/" },
-        { "title": "Anthropic research", "url": "https://www.anthropic.com/research" }
-      ]
-    }
-  ],
-  "log": [
-    { "date": "2026-10-15", "text": "Path designed and site v1 published. All sources and library versions checked. Module 0 is next." }
+  "library": [
+    { "id": "sutton-barto", "kind": "book", "modules": ["m0", "m1", "m3"], "title": "Sutton & Barto, Reinforcement Learning: An Introduction (2nd ed.)", "url": "http://incompleteideas.net/book/the-book-2nd.html", "note": "The field's textbook, free online. Ch. 1, 3 in Module 0; ch. 2, 4–6 in Module 1; ch. 8 in Module 3." },
+    { "id": "christian", "kind": "book", "modules": ["m0", "m1", "m5"], "title": "Brian Christian, The Alignment Problem", "url": "https://brianchristian.org/the-alignment-problem/", "note": "The history of RL and alignment, told for humans. Part II (Agency) early; Part III (Normativity) in Module 5." },
+    { "id": "russell", "kind": "book", "modules": ["m4"], "title": "Stuart Russell, Human Compatible", "url": "https://en.wikipedia.org/wiki/Human_Compatible", "note": "The control problem, stated by one of the authors of the standard AI textbook." },
+    { "id": "mml", "kind": "book", "modules": ["m0"], "title": "Mathematics for Machine Learning", "url": "https://mml-book.github.io/", "note": "Math refresh: ch. 5 (vector calculus) and ch. 6 (probability). Free." },
+
+    { "id": "silver-course", "kind": "course", "modules": ["m1"], "title": "David Silver, UCL Course on RL", "url": "https://www.davidsilver.uk/teaching/", "note": "Slides for the classic lecture series." },
+    { "id": "cs234", "kind": "course", "modules": ["m1", "m2"], "title": "Stanford CS234: Reinforcement Learning", "url": "https://web.stanford.edu/class/cs234/", "note": "Emma Brunskill's course: rigorous, with good problem sets." },
+    { "id": "spinning-up", "kind": "course", "modules": ["m2"], "title": "OpenAI Spinning Up in Deep RL", "url": "https://spinningup.openai.com/en/latest/", "note": "Key concepts, the algorithm taxonomy, and a clean policy-gradient derivation." },
+    { "id": "cs285", "kind": "course", "modules": ["m2"], "title": "Berkeley CS285: Deep Reinforcement Learning", "url": "https://rail.eecs.berkeley.edu/deeprlcourse/", "note": "Sergey Levine's graduate course. The deep dive behind Module 2." },
+    { "id": "arena", "kind": "course", "modules": ["m2", "m5", "m6"], "title": "ARENA: alignment research engineering curriculum", "url": "https://github.com/ARENA-education/ARENA_materials", "note": "Guided exercises: DQN, PPO, RLHF, and game-playing transformer interpretability." },
+    { "id": "hf-deeprl", "kind": "course", "modules": ["m2"], "title": "Hugging Face Deep RL Course", "url": "https://huggingface.co/learn/deep-rl-course/unit0/introduction", "note": "Hands-on units. Reportedly low-maintenance now; use selectively." },
+    { "id": "bluedot", "kind": "course", "modules": ["m4", "m5"], "title": "BlueDot Impact: AI alignment courses", "url": "https://bluedot.org/", "note": "Optional cohort-based course to take alongside Modules 4–5." },
+
+    { "id": "miles-intro", "kind": "video", "modules": ["m0"], "title": "Robert Miles: Intro to AI Safety, Remastered", "url": "https://www.youtube.com/watch?v=pYXy-A4siMw", "note": "The best 20-minute on-ramp to why alignment is hard." },
+    { "id": "silver-lectures", "kind": "video", "modules": ["m1"], "title": "DeepMind × UCL: Introduction to RL (David Silver, 2015)", "url": "https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ", "note": "Watch lectures 1–5 alongside Sutton & Barto." },
+    { "id": "cs285-lectures", "kind": "video", "modules": ["m2"], "title": "CS285: Deep RL lectures (2023)", "url": "https://www.youtube.com/playlist?list=PL_iWQOsE6TfVYGEGiAOMaOzzv41Jfm_Ps", "note": "Policy gradients, actor-critic, and Q-learning lectures." },
+    { "id": "hide-and-seek", "kind": "video", "modules": ["m2", "m4"], "title": "OpenAI: Multi-Agent Hide and Seek", "url": "https://www.youtube.com/watch?v=kopoLzvh5jY", "note": "Self-play invents tools, and then exploits the physics engine." },
+    { "id": "alphago-movie", "kind": "video", "modules": ["m3"], "title": "AlphaGo: The Movie (full documentary)", "url": "https://www.youtube.com/watch?v=WXuK6gekU1Y", "note": "Move 37, and what it feels like when a learned policy surprises its makers." },
+    { "id": "coastrunners", "kind": "video", "modules": ["m4"], "title": "CoastRunners 7: the boat that loops forever", "url": "https://www.youtube.com/watch?v=tlOIHko8ySg", "note": "The canonical specification-gaming clip." },
+    { "id": "miles-spec-gaming", "kind": "video", "modules": ["m4"], "title": "Robert Miles: 9 Examples of Specification Gaming", "url": "https://www.youtube.com/watch?v=nKJlF-olKmg", "note": "A tour of agents doing exactly what we asked." },
+    { "id": "miles-stop-button", "kind": "video", "modules": ["m4"], "title": "Computerphile: AI \"Stop Button\" Problem", "url": "https://www.youtube.com/watch?v=3TYT1QfdfsM", "note": "Why a capable agent might resist being switched off." },
+    { "id": "miles-mesa", "kind": "video", "modules": ["m5"], "title": "Robert Miles: Mesa-Optimizers and Inner Alignment", "url": "https://www.youtube.com/watch?v=bJLcIBixGj8", "note": "The video companion to Risks from Learned Optimization." },
+    { "id": "miles-inner", "kind": "video", "modules": ["m5"], "title": "Robert Miles: We Were Right! Real Inner Misalignment", "url": "https://www.youtube.com/watch?v=zkbPdEHEyEI", "note": "Goal misgeneralization in CoinRun and other games." },
+
+    { "id": "weng-rl-overview", "kind": "blog", "modules": ["m1"], "title": "Lilian Weng: A (Long) Peek into Reinforcement Learning", "url": "https://lilianweng.github.io/posts/2018-02-19-rl-overview/", "note": "A dense one-page map of the whole field." },
+    { "id": "weng-pg", "kind": "blog", "modules": ["m2"], "title": "Lilian Weng: Policy Gradient Algorithms", "url": "https://lilianweng.github.io/posts/2018-04-08-policy-gradient/", "note": "Every policy-gradient method, derived step by step." },
+    { "id": "karpathy-pong", "kind": "blog", "modules": ["m2"], "title": "Karpathy: Deep RL, Pong from Pixels", "url": "https://karpathy.github.io/2016/05/31/rl/", "note": "Policy gradients in 130 lines of numpy." },
+    { "id": "irpan-rl-hard", "kind": "blog", "modules": ["m2"], "title": "Alex Irpan: Deep Reinforcement Learning Doesn't Work Yet", "url": "https://www.alexirpan.com/2018/02/14/rl-hard.html", "note": "An honest list of why deep RL is hard, reward hacking included." },
+    { "id": "ppo-details", "kind": "blog", "modules": ["m2"], "title": "The 37 Implementation Details of PPO", "url": "https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/", "note": "Why your PPO doesn't work yet." },
+    { "id": "krakovna-list", "kind": "blog", "modules": ["m4"], "title": "Krakovna: Specification gaming examples in AI", "url": "https://vkrakovna.wordpress.com/2018/04/02/specification-gaming-examples-in-ai/", "note": "The master list. Read ten entries a week." },
+    { "id": "dm-spec-gaming", "kind": "blog", "modules": ["m4"], "title": "DeepMind: Specification gaming, the flip side of AI ingenuity", "url": "https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/", "note": "Why gaming happens, with examples." },
+    { "id": "weng-reward-hacking", "kind": "blog", "modules": ["m4", "m7"], "title": "Lilian Weng: Reward Hacking in Reinforcement Learning", "url": "https://lilianweng.github.io/posts/2024-11-28-reward-hacking/", "note": "A survey from toy games to RLHF on language models." },
+    { "id": "dm-goal-misgen", "kind": "blog", "modules": ["m5"], "title": "DeepMind: How undesired goals can arise with correct rewards", "url": "https://deepmind.google/discover/blog/how-undesired-goals-can-arise-with-correct-rewards/", "note": "Goal misgeneralization, explained with examples." },
+    { "id": "gradient-othello", "kind": "blog", "modules": ["m6"], "title": "Kenneth Li: Large Language Model, world models or surface statistics?", "url": "https://thegradient.pub/othello/", "note": "The Othello-GPT story from its first author." },
+    { "id": "nanda-othello", "kind": "blog", "modules": ["m6"], "title": "Neel Nanda: Othello-GPT has a linear emergent world representation", "url": "https://www.neelnanda.io/mechanistic-interpretability/othello", "note": "The \"mine/theirs\" insight, with code you can follow." },
+    { "id": "redwood-control", "kind": "blog", "modules": ["m7"], "title": "The case for ensuring that powerful AIs are controlled", "url": "https://www.alignmentforum.org/posts/kcKrE9mzEHrdqtDpE/the-case-for-ensuring-that-powerful-ais-are-controlled", "note": "The argument for AI control as a research agenda." },
+    { "id": "metr-reward-hacking", "kind": "blog", "modules": ["m7"], "title": "METR: Recent Frontier Models Are Reward Hacking", "url": "https://metr.org/blog/2025-06-05-recent-reward-hacking", "note": "Frontier models tampering with scorers on real evaluation tasks (2025)." },
+    { "id": "anthropic-emergent", "kind": "blog", "modules": ["m7"], "title": "Anthropic: Natural emergent misalignment from reward hacking", "url": "https://www.anthropic.com/research/emergent-misalignment-reward-hacking", "note": "Learning to hack generalized to sabotage and alignment faking (2025)." },
+
+    { "id": "dwarkesh-sutton", "kind": "podcast", "modules": ["m0", "m1"], "title": "Dwarkesh Podcast: Richard Sutton", "url": "https://www.dwarkesh.com/p/richard-sutton", "note": "The father of RL on experience, goals, and why he doubts LLMs." },
+    { "id": "dwarkesh-karpathy", "kind": "podcast", "modules": ["m2"], "title": "Dwarkesh Podcast: Andrej Karpathy", "url": "https://www.dwarkesh.com/p/andrej-karpathy", "note": "A blunt practitioner's view of what RL does and doesn't do well today." },
+    { "id": "80k-russell", "kind": "podcast", "modules": ["m4"], "title": "80,000 Hours: Stuart Russell", "url": "https://80000hours.org/podcast/episodes/stuart-russell-human-compatible-ai/", "note": "The standard model of AI, and why objectives must stay uncertain." },
+    { "id": "80k-christiano", "kind": "podcast", "modules": ["m5"], "title": "80,000 Hours: Paul Christiano", "url": "https://80000hours.org/podcast/episodes/paul-christiano-ai-alignment-solutions/", "note": "The inventor of RLHF-style preference learning on alignment strategy." },
+    { "id": "axrp-control", "kind": "podcast", "modules": ["m7"], "title": "AXRP 27: AI Control with Buck Shlegeris and Ryan Greenblatt", "url": "https://axrp.net/episode/2024/04/11/episode-27-ai-control-buck-shlegeris-ryan-greenblatt.html", "note": "The authors of the AI Control paper, in depth." },
+    { "id": "80k-buck", "kind": "podcast", "modules": ["m7"], "title": "80,000 Hours: Buck Shlegeris on AI control", "url": "https://80000hours.org/podcast/episodes/buck-shlegeris-ai-control/", "note": "Controlling AI that might want to subvert you." },
+
+    { "id": "goodhart", "kind": "paper", "modules": ["m0"], "title": "Manheim & Garrabrant (2018), Categorizing Variants of Goodhart's Law", "url": "https://arxiv.org/abs/1803.04585", "note": "Four ways a measure stops being a good target." },
+    { "id": "reward-hypothesis", "kind": "paper", "modules": ["m0"], "title": "Bowling et al. (2022), Settling the Reward Hypothesis", "url": "https://arxiv.org/abs/2212.10420", "note": "Which goals can and can't be written as a scalar reward." },
+    { "id": "dqn", "kind": "paper", "modules": ["m2"], "title": "Mnih et al. (2015), Human-level control through deep RL (DQN)", "url": "https://www.nature.com/articles/nature14236", "note": "One network, 49 Atari games, raw pixels." },
+    { "id": "ppo", "kind": "paper", "modules": ["m2"], "title": "Schulman et al. (2017), Proximal Policy Optimization", "url": "https://arxiv.org/abs/1707.06347", "note": "The workhorse algorithm, also used in RLHF." },
+    { "id": "tdgammon", "kind": "paper", "modules": ["m3"], "title": "Tesauro (1995), TD Learning and TD-Gammon", "url": "https://bkgm.com/articles/tesauro/tdl.html", "note": "Self-play reaches world-class backgammon." },
+    { "id": "alphazero", "kind": "paper", "modules": ["m3"], "title": "Silver et al. (2017), AlphaZero", "url": "https://arxiv.org/abs/1712.01815", "note": "Given the rules, learn everything else." },
+    { "id": "muzero", "kind": "paper", "modules": ["m3"], "title": "Schrittwieser et al. (2020), MuZero", "url": "https://arxiv.org/abs/1911.08265", "note": "Not even given the rules. It learns a model of them." },
+    { "id": "openspiel-paper", "kind": "paper", "modules": ["m3"], "title": "Lanctot et al. (2019), OpenSpiel", "url": "https://arxiv.org/abs/1908.09453", "note": "The game framework for this module." },
+    { "id": "concrete", "kind": "paper", "modules": ["m4"], "title": "Amodei et al. (2016), Concrete Problems in AI Safety", "url": "https://arxiv.org/abs/1606.06565", "note": "The founding taxonomy of safety problems." },
+    { "id": "gridworlds", "kind": "paper", "modules": ["m4"], "title": "Leike et al. (2017), AI Safety Gridworlds", "url": "https://arxiv.org/abs/1711.09883", "note": "Safety problems as tiny games. Your lab rebuilds them." },
+    { "id": "skalse", "kind": "paper", "modules": ["m4"], "title": "Skalse et al. (2022), Defining and Characterizing Reward Hacking", "url": "https://arxiv.org/abs/2209.13085", "note": "When is a proxy reward unhackable? Almost never." },
+    { "id": "ng-shaping", "kind": "paper", "modules": ["m4"], "title": "Ng, Harada & Russell (1999), Policy Invariance Under Reward Transformations", "url": "https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf", "note": "Potential-based shaping provably can't change the optimal policy." },
+    { "id": "relreach", "kind": "paper", "modules": ["m4"], "title": "Krakovna et al. (2018), Penalizing Side Effects with Relative Reachability", "url": "https://arxiv.org/abs/1806.01186", "note": "Impact measures: don't break the vase." },
+    { "id": "interruptibility", "kind": "paper", "modules": ["m4"], "title": "Orseau & Armstrong (2016), Safely Interruptible Agents", "url": "https://intelligence.org/files/Interruptibility.pdf", "note": "Can an agent learn not to resist being stopped?" },
+    { "id": "offswitch", "kind": "paper", "modules": ["m4"], "title": "Hadfield-Menell et al. (2017), The Off-Switch Game", "url": "https://arxiv.org/abs/1611.08219", "note": "Uncertainty about the goal is what makes switching off acceptable." },
+    { "id": "christiano-prefs", "kind": "paper", "modules": ["m5"], "title": "Christiano et al. (2017), Deep RL from Human Preferences", "url": "https://arxiv.org/abs/1706.03741", "note": "Learn the reward from comparisons. The ancestor of RLHF." },
+    { "id": "instructgpt", "kind": "paper", "modules": ["m5"], "title": "Ouyang et al. (2022), InstructGPT", "url": "https://arxiv.org/abs/2203.02155", "note": "RLHF at scale." },
+    { "id": "dpo", "kind": "paper", "modules": ["m5"], "title": "Rafailov et al. (2023), Direct Preference Optimization", "url": "https://arxiv.org/abs/2305.18290", "note": "Preference learning without an explicit reward model." },
+    { "id": "gao", "kind": "paper", "modules": ["m5"], "title": "Gao, Schulman & Hilton (2022), Scaling Laws for Reward Model Overoptimization", "url": "https://arxiv.org/abs/2210.10760", "note": "Goodhart, measured." },
+    { "id": "hubinger", "kind": "paper", "modules": ["m5"], "title": "Hubinger et al. (2019), Risks from Learned Optimization", "url": "https://arxiv.org/abs/1906.01820", "note": "Inner vs. outer alignment; mesa-optimizers." },
+    { "id": "langosco", "kind": "paper", "modules": ["m5"], "title": "Langosco et al. (2022), Goal Misgeneralization in Deep RL", "url": "https://arxiv.org/abs/2105.14111", "note": "The CoinRun agent that learned \"go right\" instead of \"get the coin\"." },
+    { "id": "shah", "kind": "paper", "modules": ["m5"], "title": "Shah et al. (2022), Goal Misgeneralization: Why Correct Specifications Aren't Enough", "url": "https://arxiv.org/abs/2210.01790", "note": "Even a perfect reward can produce the wrong goal." },
+    { "id": "li-othello", "kind": "paper", "modules": ["m6"], "title": "Li et al. (2022), Emergent World Representations (Othello-GPT)", "url": "https://arxiv.org/abs/2210.13382", "note": "Trained only on moves, it builds a board inside." },
+    { "id": "nanda-linear", "kind": "paper", "modules": ["m6"], "title": "Nanda, Lee & Wattenberg (2023), Emergent Linear Representations in World Models", "url": "https://arxiv.org/abs/2309.00941", "note": "The board is linear, in the right basis." },
+    { "id": "jenner", "kind": "paper", "modules": ["m6"], "title": "Jenner et al. (2024), Evidence of Learned Look-Ahead in a Chess Network", "url": "https://arxiv.org/abs/2406.00877", "note": "Leela Chess Zero represents future moves internally." },
+    { "id": "debate", "kind": "paper", "modules": ["m7"], "title": "Irving, Christiano & Amodei (2018), AI Safety via Debate", "url": "https://arxiv.org/abs/1805.00899", "note": "Oversight as a two-player zero-sum game." },
+    { "id": "ai-control", "kind": "paper", "modules": ["m7"], "title": "Greenblatt et al. (2023), AI Control", "url": "https://arxiv.org/abs/2312.06942", "note": "Safety protocols evaluated as red team vs. blue team." },
+    { "id": "alignment-faking", "kind": "paper", "modules": ["m7"], "title": "Greenblatt et al. (2024), Alignment Faking in Large Language Models", "url": "https://arxiv.org/abs/2412.14093", "note": "A model that behaves differently when it believes it's being trained." },
+    { "id": "macdiarmid", "kind": "paper", "modules": ["m7"], "title": "MacDiarmid et al. (2025), Natural Emergent Misalignment from Reward Hacking", "url": "https://arxiv.org/abs/2511.18397", "note": "The paper behind Anthropic's post." },
+    { "id": "cai", "kind": "paper", "modules": ["m7"], "title": "Bai et al. (2022), Constitutional AI", "url": "https://arxiv.org/abs/2212.08073", "note": "Feedback from principles instead of per-example labels." },
+
+    { "id": "python", "kind": "tool", "modules": [], "title": "Python", "url": "https://www.python.org/", "note": "The language for every lab." },
+    { "id": "numpy", "kind": "tool", "modules": [], "title": "NumPy", "url": "https://numpy.org/", "note": "Arrays. All tabular RL is written in it." },
+    { "id": "gymnasium", "kind": "tool", "modules": [], "title": "Gymnasium", "url": "https://gymnasium.farama.org/", "note": "The standard environment API." },
+    { "id": "pygame", "kind": "tool", "modules": [], "title": "pygame-ce", "url": "https://pyga.me/", "note": "Keyboard play and rendering for your games." },
+    { "id": "matplotlib", "kind": "tool", "modules": [], "title": "Matplotlib", "url": "https://matplotlib.org/", "note": "Learning curves and value heatmaps." },
+    { "id": "pytorch", "kind": "tool", "modules": [], "title": "PyTorch", "url": "https://pytorch.org/", "note": "Neural networks, on CPU or Apple MPS." },
+    { "id": "minigrid", "kind": "tool", "modules": [], "title": "MiniGrid", "url": "https://minigrid.farama.org/", "note": "Gridworld environments, and the base for your safety games." },
+    { "id": "cleanrl", "kind": "tool", "modules": [], "title": "CleanRL", "url": "https://github.com/vwxyzjn/cleanrl", "note": "Single-file reference implementations." },
+    { "id": "tensorboard", "kind": "tool", "modules": [], "title": "TensorBoard", "url": "https://www.tensorflow.org/tensorboard", "note": "Training dashboards." },
+    { "id": "openspiel", "kind": "tool", "modules": [], "title": "OpenSpiel", "url": "https://github.com/google-deepmind/open_spiel", "note": "Board games and search algorithms." },
+    { "id": "imageio", "kind": "tool", "modules": [], "title": "imageio", "url": "https://imageio.readthedocs.io/", "note": "GIFs of your agents misbehaving." },
+    { "id": "transformerlens", "kind": "tool", "modules": [], "title": "TransformerLens", "url": "https://transformerlensorg.github.io/TransformerLens/", "note": "Hooks into transformer internals." },
+    { "id": "sklearn", "kind": "tool", "modules": [], "title": "scikit-learn", "url": "https://scikit-learn.org/stable/", "note": "Linear probes." },
+    { "id": "pettingzoo", "kind": "tool", "modules": [], "title": "PettingZoo", "url": "https://pettingzoo.farama.org/", "note": "Multi-agent environments for the capstone." }
   ]
 }

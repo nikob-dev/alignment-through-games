@@ -1,4 +1,6 @@
-const STATUS_LABELS = { planned: "Planned", next: "Up next", active: "In progress", done: "Done" };
+const STATUS_LABELS = { next: "Up next", active: "In progress", done: "Done" };
+const KIND_ORDER = ["book", "course", "video", "blog", "podcast", "paper", "tool"];
+const KIND_LABELS = { book: "Books", course: "Courses", video: "Videos", blog: "Blogs", podcast: "Podcasts", paper: "Papers", tool: "Tools" };
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -15,102 +17,132 @@ function el(tag, attrs = {}, ...children) {
 }
 
 function statusPill(status) {
-  return el("span", { class: "pill", "data-status": status, text: STATUS_LABELS[status] ?? status });
+  return STATUS_LABELS[status] ? el("span", { class: "pill", "data-status": status, text: STATUS_LABELS[status] }) : null;
 }
 
-function externalLink(url, text) {
-  return el("a", { href: url, target: "_blank", rel: "noopener", text });
+function byKind(a, b) {
+  return KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind);
 }
 
-function renderMeta(meta) {
-  for (const node of document.querySelectorAll("[data-bind]")) {
-    node.textContent = meta[node.dataset.bind] ?? "";
-  }
-  for (const node of document.querySelectorAll("[data-bind-href]")) {
-    node.href = meta[node.dataset.bindHref] ?? "#";
-  }
-  document.getElementById("stats").append(
-    ...meta.stats.map((stat) => el("li", {}, el("strong", { text: stat.value }), el("span", { text: stat.label })))
-  );
+function hostOf(url) {
+  return new URL(url).hostname.replace(/^www\./, "");
 }
 
-function renderArc(arc) {
-  document.getElementById("arc").append(
-    ...arc.map((step) => el("li", {}, el("h3", { text: step.label }), el("p", { text: step.text })))
-  );
+// A favicon or thumbnail that fails to load is removed rather than shown broken.
+function optionalImage(src, attrs, onFail = (img) => img.remove()) {
+  if (!src) return null;
+  const img = el("img", { src, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer", ...attrs });
+  img.addEventListener("error", () => onFail(img), { once: true });
+  return img;
 }
 
-function renderMethod(method) {
-  document.getElementById("method").append(
-    ...method.map((card) =>
-      el("div", { class: "card" },
-        el("h3", { text: card.title }),
-        el("ul", {}, card.points.map((point) => el("li", { text: point })))
+function fallbackMedia(entry) {
+  return el("div", { class: "pfallback" }, el("strong", { text: entry.kind }), el("span", { text: hostOf(entry.url) }));
+}
+
+function previewCard(entry, preview, moduleTags) {
+  const media = el("div", { class: "pmedia" });
+  const thumb = optionalImage(preview?.image, {}, (img) => img.replaceWith(fallbackMedia(entry)));
+  media.append(thumb ?? fallbackMedia(entry));
+
+  return el("a", { class: "pcard", href: entry.url, target: "_blank", rel: "noopener", "data-kind": entry.kind },
+    media,
+    el("div", { class: "pbody" },
+      el("span", { class: "pkind", text: entry.kind }),
+      el("h4", { class: "ptitle", text: entry.title }),
+      el("p", { class: "pnote", text: entry.note || preview?.description || "" }),
+      el("div", { class: "psite" },
+        optionalImage(preview?.icon, { width: "13", height: "13" }),
+        el("span", { text: preview?.site || hostOf(entry.url) }),
+        moduleTags ? el("span", { class: "pmods", text: moduleTags }) : null
       )
     )
   );
 }
 
-function renderRoadmap(modules) {
-  document.getElementById("legend").append(...Object.keys(STATUS_LABELS).map(statusPill));
+function renderMeta(meta) {
+  for (const node of document.querySelectorAll("[data-bind]")) node.textContent = meta[node.dataset.bind] ?? "";
+  for (const node of document.querySelectorAll("[data-bind-href]")) node.href = meta[node.dataset.bindHref] ?? "#";
+}
+
+function renderArc(arc) {
+  document.getElementById("arc").append(
+    ...arc.map((step) => el("li", {}, el("div", { class: "arc-step" }, el("strong", { text: step.label }), el("span", { text: step.text }))))
+  );
+}
+
+function renderRoadmap(modules, toolsById) {
   document.getElementById("roadmap-list").append(
     ...modules.map((mod) =>
       el("li", {},
         el("a", { class: "tile", href: `#${mod.id}`, "data-status": mod.status },
-          el("div", { class: "tile-top" }, el("span", { class: "lvl", text: `LVL ${mod.level}` }), statusPill(mod.status)),
+          el("div", { class: "tile-top" },
+            el("span", { class: "lvl" }, `LVL ${mod.level} `, el("span", { text: `· ${mod.months}` })),
+            statusPill(mod.status)
+          ),
           el("h3", { text: mod.title }),
-          el("span", { class: "tile-meta", text: `${mod.months} · ~${mod.hours} h` })
+          el("p", { text: mod.summary }),
+          el("ul", { class: "tools", "aria-label": "Tools" }, mod.tools.map((id) => el("li", { text: toolsById.get(id).title })))
         )
       )
     )
   );
 }
 
-function renderReading(item) {
-  return el("li", {},
-    el("span", { class: "kind", text: item.kind }),
-    externalLink(item.url, item.title),
-    item.note ? el("p", { text: item.note }) : null
-  );
-}
-
-function renderModule(mod) {
+function renderModule(mod, { toolsById, library, previews }) {
   const summary = el("summary", {},
     el("span", { class: "badge", text: String(mod.level) }),
     el("h3", { class: "module-title", text: mod.title }),
-    statusPill(mod.status),
-    el("span", { class: "module-meta", text: `${mod.months} · ~${mod.hours} hours` }),
-    el("span", { class: "chev", "aria-hidden": "true", text: "▾" }),
-    el("p", { class: "big-q", text: mod.big_question })
+    el("p", { class: "module-q", text: mod.big_question }),
+    el("span", { class: "module-side" },
+      statusPill(mod.status),
+      el("span", { class: "module-months", text: mod.months }),
+      el("span", { class: "chev", "aria-hidden": "true", text: "▾" })
+    )
   );
 
-  const left = el("div", {},
-    el("div", { class: "block" }, el("h4", { text: "Theory" }), el("ul", { class: "readings" }, mod.theory.map(renderReading))),
-    el("div", { class: "block" }, el("h4", { text: "Key concepts" }), el("ul", { class: "chips" }, mod.concepts.map((c) => el("li", { text: c }))))
-  );
+  const toolLinks = mod.tools.map((id) => {
+    const tool = toolsById.get(id);
+    return el("li", {}, el("a", { href: tool.url, target: "_blank", rel: "noopener" },
+      optionalImage(previews[tool.url]?.icon, { width: "14", height: "14" }), tool.title));
+  });
 
-  const right = el("div", {},
-    el("div", { class: "block" },
-      el("h4", { text: "Game lab" }),
-      el("div", { class: "lab" },
-        el("h5", { text: mod.lab.title }),
-        el("p", { text: mod.lab.summary }),
-        el("ol", {}, mod.lab.steps.map((step) => el("li", { text: step })))
+  const resources = library.filter((entry) => entry.kind !== "tool" && entry.modules.includes(mod.id)).sort(byKind);
+
+  const body = el("div", { class: "module-body" },
+    el("p", { class: "module-summary", text: mod.summary }),
+    el("div", { class: "module-grid" },
+      el("div", {},
+        el("div", { class: "block" },
+          el("h4", { text: "Game lab" }),
+          el("div", { class: "lab" },
+            el("h5", { text: mod.lab.title }),
+            el("p", { text: mod.lab.summary }),
+            el("ol", {}, mod.lab.steps.map((step) => el("li", { text: step })))
+          )
+        )
+      ),
+      el("div", {},
+        el("div", { class: "block" }, el("h4", { text: "Done-check" }), el("ul", { class: "checks" }, mod.done_check.map((c) => el("li", { text: c })))),
+        el("div", { class: "block" }, el("h4", { text: "Tools" }), el("ul", { class: "tools" }, toolLinks)),
+        el("div", { class: "block" }, el("h4", { text: "Key concepts" }), el("ul", { class: "chips" }, mod.concepts.map((c) => el("li", { text: c }))))
       )
     ),
-    el("div", { class: "block" }, el("h4", { text: "Done-check" }), el("ul", { class: "checks" }, mod.done_check.map((c) => el("li", { text: c })))),
-    el("div", { class: "block" }, el("h4", { text: "Reflect" }), el("ol", { class: "questions" }, mod.reflection.map((q) => el("li", { text: q }))))
+    el("div", { class: "block resources-block" },
+      el("h4", { text: `Resources (${resources.length})` }),
+      el("div", { class: "pgrid" }, resources.map((entry) => previewCard(entry, previews[entry.url])))
+    )
   );
 
-  const details = el("details", { class: "module", id: mod.id }, summary, el("div", { class: "module-body" }, left, right));
+  const details = el("details", { class: "module", id: mod.id }, summary, body);
   details.addEventListener("toggle", () => {
     if (details.open) history.replaceState(null, "", `#${mod.id}`);
   });
   return details;
 }
 
-function renderModules(modules) {
-  document.getElementById("module-list").append(...modules.map(renderModule));
+function renderModules(modules, context) {
+  document.getElementById("module-list").append(...modules.map((mod) => renderModule(mod, context)));
 
   const toggleAll = document.getElementById("toggle-all");
   toggleAll.addEventListener("click", () => {
@@ -121,21 +153,32 @@ function renderModules(modules) {
   });
 }
 
-function renderResources(groups) {
-  document.getElementById("resource-list").append(
-    ...groups.map((group) =>
-      el("div", { class: "card" },
-        el("h3", { text: group.group }),
-        el("ul", {}, group.items.map((item) => el("li", {}, externalLink(item.url, item.title))))
-      )
-    )
-  );
+function moduleTagsFor(entry, modules) {
+  const ids = entry.kind === "tool"
+    ? modules.filter((mod) => mod.tools.includes(entry.id)).map((mod) => mod.level)
+    : modules.filter((mod) => entry.modules.includes(mod.id)).map((mod) => mod.level);
+  return ids.length ? ids.map((level) => `M${level}`).join(" · ") : null;
 }
 
-function renderLog(entries) {
-  document.getElementById("log-list").append(
-    ...entries.map((entry) => el("li", {}, el("time", { datetime: entry.date, text: entry.date }), el("span", { text: entry.text })))
-  );
+function renderLibrary(library, modules, previews) {
+  const sorted = [...library].sort(byKind);
+  const cards = sorted.map((entry) => previewCard(entry, previews[entry.url], moduleTagsFor(entry, modules)));
+  document.getElementById("library-grid").append(...cards);
+
+  const counts = Object.fromEntries(KIND_ORDER.map((kind) => [kind, sorted.filter((entry) => entry.kind === kind).length]));
+  const filters = document.getElementById("filters");
+  const buttons = [["all", "All", sorted.length], ...KIND_ORDER.map((kind) => [kind, KIND_LABELS[kind], counts[kind]])]
+    .filter(([, , count]) => count > 0)
+    .map(([kind, label, count]) => el("button", { type: "button", "data-filter": kind, "aria-pressed": String(kind === "all") }, label, el("small", { text: String(count) })));
+  filters.append(...buttons);
+
+  filters.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-filter]");
+    if (!button) return;
+    const filter = button.dataset.filter;
+    for (const other of buttons) other.setAttribute("aria-pressed", String(other === button));
+    for (const card of cards) card.hidden = filter !== "all" && card.dataset.kind !== filter;
+  });
 }
 
 function openFromHash() {
@@ -162,19 +205,23 @@ function setupThemeToggle() {
   });
 }
 
+async function fetchJson(path) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+  return response.json();
+}
+
 async function main() {
   setupThemeToggle();
-  const response = await fetch("curriculum.json");
-  if (!response.ok) throw new Error(`curriculum.json: HTTP ${response.status}`);
-  const data = await response.json();
+  const [data, previewFile] = await Promise.all([fetchJson("curriculum.json"), fetchJson("previews.json")]);
+  const previews = previewFile.previews;
+  const toolsById = new Map(data.library.filter((entry) => entry.kind === "tool").map((entry) => [entry.id, entry]));
 
   renderMeta(data.meta);
   renderArc(data.arc);
-  renderMethod(data.method);
-  renderRoadmap(data.modules);
-  renderModules(data.modules);
-  renderResources(data.resources);
-  renderLog(data.log);
+  renderRoadmap(data.modules, toolsById);
+  renderModules(data.modules, { toolsById, library: data.library, previews });
+  renderLibrary(data.library, data.modules, previews);
 
   // Web fonts shift layout; scroll to a deep link only once they've settled.
   await document.fonts.ready;
@@ -184,7 +231,5 @@ async function main() {
 
 main().catch((error) => {
   console.error(error);
-  document.querySelector("main").prepend(
-    el("p", { class: "wrap error", text: `Couldn't load the curriculum: ${error.message}` })
-  );
+  document.querySelector("main").prepend(el("p", { class: "wrap error", text: `Couldn't load the curriculum: ${error.message}` }));
 });
