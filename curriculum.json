@@ -71,17 +71,17 @@
         {
           "id": "miles-intro",
           "scope": "Whole video",
-          "time": "20 min"
+          "hours": 0.33
         },
         {
           "id": "sutton-barto",
           "scope": "Ch. 1 and 3",
-          "time": "2 evenings"
+          "hours": 4
         },
         {
           "id": "goodhart",
           "scope": "Whole paper",
-          "time": "1 hr"
+          "hours": 1
         }
       ]
     },
@@ -130,17 +130,17 @@
         {
           "id": "sutton-barto",
           "scope": "Ch. 2, 4–6",
-          "time": "4 weeks, alongside the lab"
+          "hours": 10
         },
         {
           "id": "silver-course",
           "scope": "Lectures 1–5",
-          "time": "8 hrs"
+          "hours": 8
         },
         {
           "id": "weng-rl-overview",
           "scope": "Whole post",
-          "time": "1 hr"
+          "hours": 1
         }
       ]
     },
@@ -188,19 +188,24 @@
       ],
       "core": [
         {
+          "id": "spinning-up",
+          "scope": "Part 3 (Intro to Policy Optimization) + the PPO page",
+          "hours": 2
+        },
+        {
           "id": "karpathy-pong",
           "scope": "Whole post",
-          "time": "1.5 hrs"
+          "hours": 1.5
         },
         {
           "id": "ppo-details",
           "scope": "The 13 core details",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "jones-debugging",
           "scope": "Whole post",
-          "time": "1 hr"
+          "hours": 1
         }
       ]
     },
@@ -242,17 +247,17 @@
         {
           "id": "nair-alphazero",
           "scope": "Tutorial, then skim the repo",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "alphazero",
           "scope": "Main paper",
-          "time": "1.5 hrs"
+          "hours": 1.5
         },
         {
           "id": "sutton-barto",
           "scope": "Ch. 8",
-          "time": "1 evening"
+          "hours": 2
         }
       ]
     },
@@ -298,22 +303,22 @@
         {
           "id": "krakovna-list",
           "scope": "Skim the list",
-          "time": "45 min"
-        },
-        {
-          "id": "miles-spec-gaming",
-          "scope": "Whole video",
-          "time": "10 min"
+          "hours": 0.75
         },
         {
           "id": "gridworlds",
           "scope": "Sections 1–2",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "concrete",
           "scope": "Sections 1–5",
-          "time": "2 hrs"
+          "hours": 2
+        },
+        {
+          "id": "ng-shaping",
+          "scope": "The main theorem",
+          "hours": 1
         }
       ]
     },
@@ -363,22 +368,22 @@
         {
           "id": "christiano-prefs",
           "scope": "Main paper",
-          "time": "1.5 hrs"
+          "hours": 1.5
         },
         {
           "id": "langosco",
           "scope": "Main paper",
-          "time": "1.5 hrs"
+          "hours": 1.5
         },
         {
           "id": "gao",
           "scope": "Sections 1–3",
-          "time": "1.5 hrs"
+          "hours": 1.5
         },
         {
           "id": "turner-maze",
           "scope": "Sections 1–3",
-          "time": "1.5 hrs"
+          "hours": 1.5
         }
       ]
     },
@@ -422,17 +427,17 @@
         {
           "id": "li-othello",
           "scope": "Main paper",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "nanda-othello",
           "scope": "Post plus the code",
-          "time": "1 evening"
+          "hours": 2
         },
         {
           "id": "turner-maze",
           "scope": "Steering sections",
-          "time": "1 hr"
+          "hours": 1
         }
       ]
     },
@@ -477,22 +482,22 @@
         {
           "id": "ai-control",
           "scope": "Sections 1–3",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "axrp-control",
           "scope": "Whole episode",
-          "time": "2.5 hrs"
+          "hours": 2.5
         },
         {
           "id": "everitt-tampering",
           "scope": "Sections 1–4",
-          "time": "2 hrs"
+          "hours": 2
         },
         {
           "id": "denison-subterfuge",
           "scope": "Sections 1–3",
-          "time": "1 hr"
+          "hours": 1
         }
       ]
     }
@@ -626,7 +631,7 @@
       "extra": [
         {
           "label": "Slides",
-          "url": "https://davidstarsilver.wordpress.com/teaching/"
+          "url": "https://www.davidsilver.uk/teaching/"
         }
       ]
     },
@@ -649,7 +654,17 @@
       ],
       "title": "OpenAI Spinning Up in Deep RL",
       "url": "https://spinningup.openai.com/en/latest/",
-      "note": "Key concepts, the algorithm taxonomy, and a clean policy-gradient derivation."
+      "note": "Key concepts, the algorithm taxonomy, and a clean policy-gradient derivation.",
+      "extra": [
+        {
+          "label": "Part 3: Policy optimization",
+          "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html"
+        },
+        {
+          "label": "PPO",
+          "url": "https://spinningup.openai.com/en/latest/algorithms/ppo.html"
+        }
+      ]
     },
     {
       "id": "cs285",

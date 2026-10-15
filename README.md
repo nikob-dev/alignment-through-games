@@ -17,7 +17,7 @@ A learning path on how AI agents learn rules and pursue goals, and on the alignm
 ## Editing
 
 - **Add a resource:** append to `library` with `id`, `kind` (book/course/video/blog/podcast/paper), `title`, `url`, `note`, and `modules` (e.g. `["m4"]`). Optional `extra: [{label, url}]` adds a second link (slides, code, paper).
-- **Mark it core:** add `{id, scope, time}` to that module's `core` list (1–4 items). Everything else in the module shows under "Go deeper".
+- **Mark it core:** add `{id, scope, hours}` to that module's `core` list (1–4 items; hours is a number, summed into the module's reading total). Everything else in the module shows under "Go deeper".
 - **Add a tool:** add `{id, title, url}` to `tools`, then list its id in the module's `tools`.
 - **Update progress:** set a module's `status` to `planned`, `next`, `active`, or `done`.
 - Then run:

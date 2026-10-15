@@ -24,6 +24,16 @@ function byKind(a, b) {
   return KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind);
 }
 
+function formatHours(hours) {
+  if (hours < 1) return `${Math.round(hours * 60)} min`;
+  const rounded = Math.round(hours * 2) / 2;
+  return `~${rounded} ${rounded === 1 ? "hr" : "hrs"}`;
+}
+
+function coreHours(mod) {
+  return mod.core.reduce((total, item) => total + item.hours, 0);
+}
+
 function hostOf(url) {
   return new URL(url).hostname.replace(/^www\./, "");
 }
@@ -59,7 +69,7 @@ function previewCard(entry, preview, { moduleTags = null, core = null, isCore = 
         isCore ? el("span", { class: "pbadge", text: "Core" }) : null
       ),
       el("h4", { class: "ptitle" }, el("a", { class: "plink", href: entry.url, target: "_blank", rel: "noopener", text: entry.title })),
-      core ? el("p", { class: "pcore" }, el("strong", { text: core.scope }), ` · ${core.time}`) : null,
+      core ? el("p", { class: "pcore" }, el("strong", { text: core.scope }), ` · ${formatHours(core.hours)}`) : null,
       el("p", { class: "pnote", text: entry.note || preview?.description || "" }),
       extras,
       el("div", { class: "psite" },
@@ -88,7 +98,7 @@ function renderRoadmap(modules, toolsById) {
       el("li", {},
         el("a", { class: "tile", href: `#${mod.id}`, "data-status": mod.status },
           el("div", { class: "tile-top" },
-            el("span", { class: "lvl" }, `LVL ${mod.level} `, el("span", { text: `· ${mod.months}` })),
+            el("span", { class: "lvl" }, `LVL ${mod.level} `, el("span", { text: `· ${mod.months} · ${formatHours(coreHours(mod))} reading` })),
             statusPill(mod.status)
           ),
           el("h3", { text: mod.title }),
@@ -107,7 +117,7 @@ function renderModule(mod, { toolsById, library, previews }) {
     el("p", { class: "module-q", text: mod.big_question }),
     el("span", { class: "module-side" },
       statusPill(mod.status),
-      el("span", { class: "module-months", text: mod.months }),
+      el("span", { class: "module-months", text: `${mod.months} · ${formatHours(coreHours(mod))} reading` }),
       el("span", { class: "chev", "aria-hidden": "true", text: "▾" })
     )
   );

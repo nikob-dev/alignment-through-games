@@ -15,7 +15,7 @@ STATUSES = {"planned", "next", "active", "done"}
 KINDS = {"book", "course", "video", "blog", "podcast", "paper"}
 MODULE_FIELDS = {"id", "level", "months", "status", "title", "summary", "big_question", "tools", "concepts", "lab", "done_check", "core"}
 LIBRARY_FIELDS = {"id", "kind", "modules", "title", "url", "note"}
-CORE_FIELDS = {"id", "scope", "time"}
+CORE_FIELDS = {"id", "scope", "hours"}
 MAX_CORE = 4
 
 
@@ -41,8 +41,11 @@ def check(data: dict) -> list[str]:
         if not 1 <= len(module["core"]) <= MAX_CORE:
             errors.append(f"{label}: needs 1-{MAX_CORE} core items, has {len(module['core'])}")
         for item in module["core"]:
-            if CORE_FIELDS - item.keys() or not all(item.get(field) for field in CORE_FIELDS):
-                errors.append(f"{label}: core item {item.get('id')!r} needs non-empty {sorted(CORE_FIELDS)}")
+            hours = item.get("hours")
+            if CORE_FIELDS - item.keys() or not item["id"] or not item["scope"]:
+                errors.append(f"{label}: core item {item.get('id')!r} needs {sorted(CORE_FIELDS)}")
+            elif not isinstance(hours, (int, float)) or isinstance(hours, bool) or hours <= 0:
+                errors.append(f"{label}: core item {item['id']!r} hours must be a positive number")
             elif label not in library.get(item["id"], {}).get("modules", []):
                 errors.append(f"{label}: core item {item['id']!r} is not a library entry for this module")
         if not any(label in entry["modules"] for entry in data["library"]):

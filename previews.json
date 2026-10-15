@@ -267,13 +267,6 @@
       "site": "Brian Christian",
       "icon": "https://brianchristian.org/favicon.svg"
     },
-    "https://davidstarsilver.wordpress.com/teaching/": {
-      "title": "Teaching",
-      "description": "Advanced Topics  2015 (COMPM050/COMPGI13) Reinforcement Learning Video-lectures available here Lecture 1: Introduction to Reinforcement Learning Lecture 2: Markov Decision Processes Lecture 3: Plan…",
-      "image": "https://s0.wp.com/i/blank.jpg?m=1383295312i",
-      "site": "David Silver",
-      "icon": "https://s1.wp.com/i/favicon.ico?m=1713425267i"
-    },
     "https://deepmind.google/discover/blog/how-undesired-goals-can-arise-with-correct-rewards/": {
       "title": "How undesired goals can arise with correct rewards",
       "description": "As we build increasingly advanced artificial intelligence (AI) systems, we want to make sure they don’t pursue undesired goals. Such behaviour in an AI agent is often the result of specification gaming – exploiting a poor choice of what they are rewarded for. In our latest paper, we explore a more subtle mechanism by which AI systems may unintentionally learn to pursue undesired goals: goal misgeneralisation (GMG). GMG occurs when a system's capabilities generalise successfully but its goal does not generalise as desired, so the system competently pursues the wrong goal. Crucially, in contrast to specification gaming, GMG can occur even when the AI system is trained with a correct specification.",
@@ -305,7 +298,7 @@
     "https://github.com/vwxyzjn/cleanrl": {
       "title": "GitHub - vwxyzjn/cleanrl: High-quality single file implementation of Deep Reinforcement Learning algorithms with research-friendly features (PPO, DQN, C51, DDPG, TD3, SAC, PPG)",
       "description": "High-quality single file implementation of Deep Reinforcement Learning algorithms with research-friendly features (PPO, DQN, C51, DDPG, TD3, SAC, PPG) - vwxyzjn/cleanrl",
-      "image": "https://opengraph.githubassets.com/ed578d55496a62eb020a78af33d96f758058a8ba720a4633cb4716dee2cc9fce/vwxyzjn/cleanrl",
+      "image": "https://opengraph.githubassets.com/e51a3164914ac2dc3ac8f73cf03e3cad831fc9c0fca9ce1b92f3f096fdfb208d/vwxyzjn/cleanrl",
       "site": "GitHub",
       "icon": "https://github.com/fluidicon.png"
     },
@@ -456,6 +449,20 @@
       "site": "spinningup.openai.com",
       "icon": "https://spinningup.openai.com/en/latest/_static/openai_icon.ico"
     },
+    "https://spinningup.openai.com/en/latest/algorithms/ppo.html": {
+      "title": "Proximal Policy Optimization — Spinning Up  documentation",
+      "description": null,
+      "image": null,
+      "site": "spinningup.openai.com",
+      "icon": "https://spinningup.openai.com/en/latest/_static/openai_icon.ico"
+    },
+    "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html": {
+      "title": "Part 3: Intro to Policy Optimization — Spinning Up  documentation",
+      "description": null,
+      "image": null,
+      "site": "spinningup.openai.com",
+      "icon": "https://spinningup.openai.com/en/latest/_static/openai_icon.ico"
+    },
     "https://suragnair.github.io/posts/alphazero.html": {
       "title": "Simple Alpha Zero",
       "description": null,
@@ -497,6 +504,13 @@
       "image": "https://www-cdn.anthropic.com/images/4zrzovbb/website/cbe59a69a76f6c6cc4517a8185c597481fa207a5-1200x630.jpg",
       "site": "anthropic.com",
       "icon": "https://www.anthropic.com/favicon.ico"
+    },
+    "https://www.davidsilver.uk/teaching/": {
+      "title": "Teaching",
+      "description": "Advanced Topics  2015 (COMPM050/COMPGI13) Reinforcement Learning Video-lectures available here Lecture 1: Introduction to Reinforcement Learning Lecture 2: Markov Decision Processes Lecture 3: Plan…",
+      "image": "https://s0.wp.com/i/blank.jpg?m=1383295312i",
+      "site": "David Silver",
+      "icon": "https://s1.wp.com/i/favicon.ico?m=1713425267i"
     },
     "https://www.dwarkesh.com/p/andrej-karpathy": {
       "title": "Andrej Karpathy — AGI is still a decade away",
